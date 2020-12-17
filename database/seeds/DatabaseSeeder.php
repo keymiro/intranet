@@ -20,10 +20,11 @@ class DatabaseSeeder extends Seeder
         $this->call(AreasTableSeeder::class);
         $this->call(PeoplesTableSeeder::class);
         $this->call(UsersTableSeeder::class);
+        $this->call(PermissionsTableSeeder::class);
         $this->call(OptionTableSeeder::class);
         $this->call(TypePermitSeeder::class);
         $this->call(CategoryArchiveTableSeeder::class);
-        $this->call(PermissionsTableSeeder::class);
+
 
 
 
