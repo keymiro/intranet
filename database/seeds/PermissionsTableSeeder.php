@@ -108,7 +108,7 @@ class PermissionsTableSeeder extends Seeder
             'questionnaire_present_result_details','questionnaire_present_show','traceability_index',
             'form_index','form_send'
         ]);
-       
+
         $user = User::find(1);
         $user ->assignRole('super-admin');
 

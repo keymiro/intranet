@@ -162,6 +162,7 @@
                     <div class="card-body">
                         @yield('content')
                     </div>
+                    @include('partials.toast')
                     <div class="card-footer" align="center">
                         <footer style="bottom:0;">
                             <small>&copy; Ideas Creativas IC 2020-2020</small>

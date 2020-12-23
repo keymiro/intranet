@@ -56,7 +56,7 @@
         </div>
 
         <div class="form-group">
-            <p CLASS="bg-primary rounded text-light" align="center">Horario Laboral</p>
+            <p CLASS="bg-primary rounded text-light" align="center">Horario del Permiso</p>
             <div class="row">
                 <div class="col">
                     <label for="preturn"> Hora de entrada </label>

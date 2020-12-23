@@ -13,6 +13,8 @@ use App\AdverseEvent;
 use App\User;
 use App\Area;
 use App\ChangeTurn;
+use App\Events\WorkPermitEvent;
+use App\Notifications\WorkPermitNotification;
 use App\WorkPermit;
 use Illuminate\Support\Facades\Auth;
 
@@ -160,6 +162,14 @@ class FormsController extends Controller
           'typepermit_id'=>$request['typepermit'],
           'user_id'=>auth()->user()->id,
       ]);
+
+        event(new WorkPermitEvent($workpermit));
+
+    //   User::all()->except($workpermit->user_id)
+    //              ->each(function(User $user) use ($workpermit)
+    //              {
+    //               $user->notify(new WorkPermitNotification($workpermit));
+    //              });
 
 
 
