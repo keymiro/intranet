@@ -19,7 +19,5 @@ class WorkPermit extends Model
     public function typepermit(){
         return $this->belongsTo('App\TypePermit','typepermit_id');
     }
-    public function notification(){
-        return $this->hasMany('App\Notification');
-    }
+   
 }

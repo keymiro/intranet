@@ -10,7 +10,7 @@
       </div>
       <div class="toast-body">
           @forelse (auth()->user()->unreadNotifications  as $n)
-            <p> {{ !empty($n->data['datepermit']) ? $n->data['datepermit']:'' }}</p>
+            <p>{{$n->data['datepermit']}}</p>
             <p>{{$n->data['rdate']}}</p>
             <a href="#" class="link-success">Success link</a><br>
             <small>{{$n->created_at->diffForHumans()}}</small><br>
