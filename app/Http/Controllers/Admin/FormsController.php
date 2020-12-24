@@ -26,9 +26,9 @@ class FormsController extends Controller
             ->only('RegisterChangeturn');
         $this->middleware('permission:work_permit_index')
             ->only('ListWorkPermit','DetailsWorkPermit');
-        $this->middleware('permission:adverse_event_index')
+        $this->middleware('permission:event_adverse_index')
             ->only('index','DetailsAdverseEnvents');
-        $this->middleware('permission:adverse_event_asing')
+        $this->middleware('permission:event_adverse_asing')
             ->only('ExportAdverseEnvent','UpdateAdverseEnvents');
     }
 

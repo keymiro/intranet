@@ -52,6 +52,7 @@ class PermissionsTableSeeder extends Seeder
         Permission::create(['name' => 'question_create']);
         Permission::create(['name' => 'question_edit']);
         Permission::create(['name' => 'question_destroy']);
+        Permission::create(['name' => 'question_show']);
 
         Permission::create(['name' => 'event_adverse_index']);
         Permission::create(['name' => 'event_adverse_asing']);
@@ -87,7 +88,7 @@ class PermissionsTableSeeder extends Seeder
         $super_admin->givePermissionTo([
             'user_index','user_create','user_edit','user_destroy',
             'questionnaire_index','questionnaire_create','questionnaire_edit','questionnaire_destroy',
-            'question_index','question_create','question_edit','question_destroy',
+            'question_index','question_create','question_edit','question_destroy','question_show',
             'event_adverse_index','event_adverse_asing',
             'work_permit_index',
             'change_turn_index','change_turn_register',
