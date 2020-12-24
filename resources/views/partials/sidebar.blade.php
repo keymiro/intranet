@@ -158,12 +158,12 @@
                             <a class="btn btn-warning" href="javascript:history.go(1)"><i
                                     class="fas fa-chevron-right fa-2x"></i></a>
                         </div>
+                        @include('partials.toast')
                     @endauth
                     <div class="card-body">
                         @yield('content')
                     </div>
-                    @include('partials.toast')
-                    <div class="card-footer" align="center">
+                            <div class="card-footer" align="center">
                         <footer style="bottom:0;">
                             <small>&copy; Ideas Creativas IC 2020-2020</small>
                         </footer>

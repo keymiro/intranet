@@ -8,7 +8,7 @@
     @endif
     <div class="container">
         <div class="card-header bg-primary text-light my-2 shadow-sm">
-            <h3><i class="fas fa-bell"></i> Notificaciones</h3>
+            <h3><i class="far fa-newspaper"></i> Novedades</h3>
 
         </div>
         @include('partials.notification')

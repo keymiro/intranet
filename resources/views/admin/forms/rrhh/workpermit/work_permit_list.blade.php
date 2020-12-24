@@ -28,7 +28,7 @@
             <td>{{$w->created_at->diffForHumans()}}</td>
             <td>
                 <a class="btn btn-primary mb-2 text-light"
-                   href="{{route('details.WorkPermit',$w->id)}}">
+                   href="">
                     Ver
                 </a>
             </td>

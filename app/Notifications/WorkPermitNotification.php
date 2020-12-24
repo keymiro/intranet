@@ -60,6 +60,8 @@ class WorkPermitNotification extends Notification
             'title' =>'Permiso Laboral',
             'workpermit_id' => $this->workpermit->id,
             'user_id' => $this->workpermit->user_id,
+            'name_user'=> $this->workpermit->user->people->names,
+            'lastname_user'=> $this->workpermit->user->people->lastnames,
             'datepermit'=> $this->workpermit->datepermit,
             'timepermit'=> $this->workpermit->timepermit,
             'rdate'=> $this->workpermit->rdate,
