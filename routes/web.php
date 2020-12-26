@@ -47,6 +47,11 @@ route::get('/correspondencia','ArchiveController@IndexCorrespondence')
 
 route::get('/user_support','UserSupportController@index')
     ->name('user_support.index');
+    /*** notificaciones */
+   route::get('/notificaciones', 'NotificationController@index')
+    ->name('index.all.Notifications');
+    route::get('/notificaciones/read', 'NotificationController@readAllNotifications')
+    ->name('Read.all.Notifications');
 
 Route::group(['namespace' => 'Admin'], function () {
     /*--------------------------rutas usuario-----------------------------------------*/
@@ -79,6 +84,8 @@ Route::group(['namespace' => 'Admin'], function () {
     ->name('show.rolehaspermission');
     route::post('/revocar-permiso/{id}/rol','PermissionsController@RemoveRoleHasPermisssion')
         ->name('permisos.remove');
+
+
     /****--------------------------rutas cuestionarios--------------------------------------*/
     route::get('/result-questionnaire-find/{id}/ResultadoCuestionarios', 'QuestionnaireController@listresultfind')
         ->name('result.questionnaire.find');

@@ -20,22 +20,8 @@ class HomeController extends Controller
     {
         if (auth()->check())
         {
-            $Userid=auth()->user()->id;
-            $UserArea=auth()->user()->people->area_id;
-            $UserNotify=User::query()
-                            ->findOrFail($Userid);
+          return  view('home');
 
-            $workpermit=WorkPermit::all();
-
-            $UserNotifyChangeTurn=ChangeTurn::all();
-
-            $UserNotifyVacation = WorkVacation::all();
-
-            return  view('home',
-                compact('UserNotify',
-                    'workpermit',
-                    'UserNotifyChangeTurn',
-                    'UserNotifyVacation'));
         }else{
             return view('welcome');
         }

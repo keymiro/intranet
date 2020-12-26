@@ -1,43 +1,48 @@
 
-<div id="toast1" class="toast"  role="alert" aria-live="assertive" aria-atomic="true" data-autohide="false"
-    style="position: absolute; top:0; right:0; z-index:1;">
-    <div class="toast-header">
-        <i class="fas fa-bell mr-2 text-warning"></i>
-        <strong class="mr-auto">Notificaciones</strong>
-        <button type="button" class="ml-2 mb-1 close" data-dismiss="toast" aria-label="Close">
-        <span aria-hidden="true">×</span>
-        </button>
-    </div>
-
-    <div class="toast-body">
-        <div class="text-secondary font-weight-bold">
-           <li>Nuevas</li>
-        </div>
+ <!-- Notifications Dropdown Menu -->
+ <li class="nav-item dropdown">
+    <a class="nav-link" data-toggle="dropdown" href="#">
+      <i class="fas fa-bell"></i>
+      <span class="badge badge-danger navbar-badge">
+        @if (count (auth()->user()->unreadNotifications))
+        <span class="badge badge-danger">
+            {{ count(auth()->user()->unreadNotifications)}}
+        </span>
+        @endif
+    </span>
+    </a>
+    <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right toast" >
+        <span class="dropdown-header">
+        <strong> Nuevas</strong>
+        </span>
+        <div class="toast-body">
                 @forelse (auth()->user()->unreadNotifications  as $n)
-                    <a href="{{route('details.WorkPermit',$n->data['workpermit_id'])}}" class="link-success">
-                                {{$n->data['name_user']}}
-                                {{$n->data['lastname_user']}} ha solicitado un <br>
-                                {{$n->data['title']}}<br>
-                        <small>{{$n->created_at->diffForHumans()}}</small><br>
+                    <a href="{{route('details.WorkPermit',$n->data['workpermit_id'])}}" >
+                        {{$n->data['name_user']}}
+                        {{$n->data['lastname_user']}} ha solicitado un
+                        {{$n->data['title']}} <br>
+                <small>{{$n->created_at->diffForHumans()}}</small><br>
                     </a><br>
                 @empty
-                  <small class="text-muted">No hay notificaciones nuevas</small>
+                    <span class="ml-3 pull-right text-muted text-sm">No hay notificaciones nuevas</span>
                 @endforelse
-        <div class="text-secondary font-weight-bold">
-            <li>Anteriores</li>
-        </div>
-                @forelse (auth()->user()->readNotifications  as $n )
-                <a href="#" class="link-success">
-                               {{$n->data['name_user']}}
-                               {{$n->data['lastname_user']}} ha solicitado un<br>
-                               {{$n->data['title']}}<br>
-                       <small>{{$n->created_at->diffForHumans()}}</small><br>
-                   </a><br>
+            <div class="dropdown-divider"></div>
+            <span class="dropdown-header">
+                <strong>Anteriores</strong>
+                </span>
+            @forelse (auth()->user()->readNotifications  as $n )
+                    <a href="{{route('details.WorkPermit',$n->data['workpermit_id'])}}">
+                        {{$n->data['name_user']}}
+                        {{$n->data['lastname_user']}} ha solicitado un<br>
+                        {{$n->data['title']}}<br>
+                    <small>{{$n->created_at->diffForHumans()}}</small><br>
+                    </a><br>
                 @empty
-                        <small class="text-muted">No hay notificaciones leídas</small>
+                    <span class="ml-3 pull-right text-muted text-sm">No hay notificaciones leídas</span>
                 @endforelse
-
-        <div class="dropdown-divider"></div>
-        <a href=""> Marcar todas como leídas</a>
+            <div class="dropdown-divider"></div>
+            <a href="{{route('Read.all.Notifications')}}" class="dropdown-item dropdown-footer">Marcar todo leído</a>
+            <a href="{{route('index.all.Notifications')}}" class="dropdown-item dropdown-footer">Ver a detalle</a>
+        </div>
     </div>
-</div>
+</li>

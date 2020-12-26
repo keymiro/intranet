@@ -11,8 +11,7 @@
             <h3><i class="far fa-newspaper"></i> Novedades</h3>
 
         </div>
-        @include('partials.notification')
-        <br>
+           <br>
         <div class="row">
 
 

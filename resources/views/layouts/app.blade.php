@@ -73,19 +73,8 @@
                         @endif
                     @else
                     {{-- campana notificaciones --}}
-                            <li class="nav-item dropdown">
-                                <a class="nav-link" type="button"
-                                id="btnToasts">
-                                    <i class="fas fa-bell"></i>
-                                    <span class="badge badge-danger navbar-badge">
-                                        @if (count (auth()->user()->unreadNotifications))
-                                        <span class="badge badge-danger">
-                                            {{ count(auth()->user()->unreadNotifications)}}
-                                        </span>
-                                        @endif
-                                    </span>
-                                 </a>
-                            </li>
+                    @include('partials.toast')
+
                         <li class="nav-item dropdown">
                             <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button"
                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
@@ -110,11 +99,10 @@
             </div>
         </div>
     </nav>
-    <div class="row">
+       <div class="row">
         <div class="col">
             <div class="d-flex " id="wrapper">
                 @include('partials.sidebar')
-
             </div>
         </div>
     </div>

@@ -158,7 +158,7 @@
                             <a class="btn btn-warning" href="javascript:history.go(1)"><i
                                     class="fas fa-chevron-right fa-2x"></i></a>
                         </div>
-                        @include('partials.toast')
+
                     @endauth
                     <div class="card-body">
                         @yield('content')
