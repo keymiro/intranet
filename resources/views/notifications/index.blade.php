@@ -14,7 +14,7 @@
            <br>
            <div class="cantainer">
             <a href="{{route('Read.all.Notifications')}}" class="float-right btn btn-outline-primary">Marcar todo leído</a>
-            <p class="text-muted">Notificaciones Sin Leer</p>
+            <p class="text-muted">Nuevas</p>
             @forelse ($unreadnotify  as $n )
                 <div class="card">
                         <div class="card-body">
@@ -33,7 +33,7 @@
             @empty
                 <span class="ml-3 pull-right text-muted text-sm">No hay notificaciones leídas</span>
             @endforelse <hr>
-               <p class="text-muted">Notificaciones Leídas</p>
+               <p class="text-muted">Anteriores</p>
                 @forelse ($readnotify as $n )
                     <div class="card">
                             <div class="card-body">
