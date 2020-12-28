@@ -11,18 +11,23 @@
         @endif
     </span>
     </a>
-    <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right toast" >
+    <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right toast">
         <span class="dropdown-header">
-        <strong> Nuevas</strong>
+        <strong><i class="fas fa-inbox"></i> Nuevas</strong>
         </span>
         <div class="toast-body">
                 @forelse (auth()->user()->unreadNotifications  as $n)
                     <a href="{{route('details.WorkPermit',$n->data['workpermit_id'])}}" >
                         {{$n->data['name_user']}}
                         {{$n->data['lastname_user']}} ha solicitado un
-                        {{$n->data['title']}} <br>
-                <small>{{$n->created_at->diffForHumans()}}</small><br>
-                    </a><br>
+                        {{$n->data['title']}}
+                    </a>  - 
+                    <a href="{{route('Read.Notifications', $n->id)}}" class="text-muted">
+                       <i class="fas fa-check"></i> Marcar Leído
+                    </a> <br>
+
+                <small class="text-muted">{{$n->created_at->diffForHumans()}}</small>
+                   <br>
                 @empty
                     <span class="ml-3 pull-right text-muted text-sm">No hay notificaciones nuevas</span>
                 @endforelse
@@ -33,10 +38,12 @@
             @forelse (auth()->user()->readNotifications  as $n )
                     <a href="{{route('details.WorkPermit',$n->data['workpermit_id'])}}">
                         {{$n->data['name_user']}}
-                        {{$n->data['lastname_user']}} ha solicitado un<br>
-                        {{$n->data['title']}}<br>
-                    <small>{{$n->created_at->diffForHumans()}}</small><br>
-                    </a><br>
+                        {{$n->data['lastname_user']}} ha solicitado un
+                        {{$n->data['title']}} <br></a>
+                    <small class="text-muted">{{$n->created_at->diffForHumans()}}</small>
+
+
+                    <br>
                 @empty
                     <span class="ml-3 pull-right text-muted text-sm">No hay notificaciones leídas</span>
                 @endforelse

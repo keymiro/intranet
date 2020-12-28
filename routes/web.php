@@ -52,6 +52,8 @@ route::get('/user_support','UserSupportController@index')
     ->name('index.all.Notifications');
     route::get('/notificaciones/read', 'NotificationController@readAllNotifications')
     ->name('Read.all.Notifications');
+    route::get('/notificacion/read/{id}', 'NotificationController@readNotification')
+    ->name('Read.Notifications');
 
 Route::group(['namespace' => 'Admin'], function () {
     /*--------------------------rutas usuario-----------------------------------------*/

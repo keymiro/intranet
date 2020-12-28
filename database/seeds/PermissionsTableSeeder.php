@@ -74,10 +74,16 @@ class PermissionsTableSeeder extends Seeder
         Permission::create(['name' => 'archive_edit']);
         Permission::create(['name' => 'archive_destroy']);
 
+        Permission::create(['name' => 'notify_work_permit']);
+        Permission::create(['name' => 'notify_event_adverse']);
+        Permission::create(['name' => 'notify_change_turn']);
+        Permission::create(['name' => 'notify_vacation']);
+
         //lista de roles
         $super_admin = Role::create(['name'=>'super-admin']);
         $Gerencia = Role::create(['name'=>'gerencia']);
-        $director  = Role::create(['name'=>'director']);
+        $director_fin  = Role::create(['name'=>'director-financiero']);
+        $director_med  = Role::create(['name'=>'director-medico']);
         $coordinador_rrhh =Role::create(['name'=>'coordinador-rrhh']);
         $funcionario = Role::create(['name'=>'funcionario']);
         $secretaria = Role::create(['name'=>'secretaria']);
@@ -102,6 +108,7 @@ class PermissionsTableSeeder extends Seeder
             'questionnaire_present_index','questionnaire_present_create','questionnaire_present_result'
             ,'questionnaire_present_result_details','questionnaire_present_show',
             'questionnaire_result_index','traceability_index','form_index','form_send','vacation_index',
+            'notify_work_permit','notify_event_adverse','notify_change_turn','notify_vacation'
         ]);
         $funcionario->givePermissionTo([
             'archive_index','user_support_index','correspondence_index',

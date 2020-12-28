@@ -8,7 +8,7 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Support\Facades\Notification;
 
-class WorkPermitListener
+class WorkPermitListener implements ShouldQueue
 {
     /**
      * Create the event listener.
@@ -32,12 +32,33 @@ class WorkPermitListener
         // ->each(function(User $user) use ($workpermit)
         // {
         //  $user->notify(new WorkPermitNotification($workpermit));
-        // });
-        User::all()
-            ->except($event->workpermit->user_id)
-            ->each(function(User $user)use($event)
+        // }); all()->except($event->workpermit->user_id)
+
+        User::all()->except($event->workpermit->user_id)
+           ->each(function(User $user)use($event)
             {
-                Notification::send($user, new WorkPermitNotification($event->workpermit));
+                if($event->workpermit->time_permit <=24)
+                {
+                    if($user->hasRole(['super-admin','coordinador','coordinador-calidad',
+                                       'admin','coordinador-rrhh',
+                                     ])){
+                                        Notification::send($user, new WorkPermitNotification($event->workpermit));
+                                         }
+
+                    }elseif($event->workpermit->time_permit >24 && $event->workpermit->time_permit <= 48)
+                    {
+                        if($user->hasRole(['super-admin','coordinador','director-financiero',
+                                    'director-medico','director-financiero','coordinador-calidad',
+                                    'admin','coordinador-rrhh',
+                                    ])){
+                                            Notification::send($user, new WorkPermitNotification($event->workpermit));
+                                        }
+                            }elseif($event->workpermit->time_permit > 48)
+                            {
+                                if($user->hasRole('gerencia')){
+                                        Notification::send($user, new WorkPermitNotification($event->workpermit));
+                                    }
+                            }
             });
     }
 }
