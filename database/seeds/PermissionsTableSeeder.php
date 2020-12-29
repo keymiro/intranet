@@ -104,7 +104,7 @@ class PermissionsTableSeeder extends Seeder
             'permission_assign','show_role_has_permisssion','remove_role_has_permisssion',
             'permission_roles_index',
             'rol_index','rol_create','rol_edit','rol_destroy',
-            'administrar_coordinacion','correspondence_index',
+            'administrar_coordinacion','correspondence_index','approve_request',
             'questionnaire_present_index','questionnaire_present_create','questionnaire_present_result'
             ,'questionnaire_present_result_details','questionnaire_present_show',
             'questionnaire_result_index','traceability_index','form_index','form_send','vacation_index',
@@ -115,6 +115,9 @@ class PermissionsTableSeeder extends Seeder
             'questionnaire_present_result','questionnaire_present_index','questionnaire_present_create',
             'questionnaire_present_result_details','questionnaire_present_show','traceability_index',
             'form_index','form_send'
+        ]);
+        $Gerencia->givePermissionTo([
+            'work_permit_index','approve_request'
         ]);
 
         $user = User::find(1);

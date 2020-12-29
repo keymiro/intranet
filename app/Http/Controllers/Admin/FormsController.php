@@ -3,7 +3,6 @@
 namespace App\Http\Controllers\admin;
 
 use App\Http\Controllers\Controller;
-use App\Notification;
 use App\WorkPermit;
 use App\WorkVacation;
 use Barryvdh\DomPDF\Facade as PDF;
@@ -11,6 +10,7 @@ use Carbon\Carbon;
 use Illuminate\Http\Request;
 use App\AdverseEvent;
 use App\ChangeTurn;
+use App\User;
 
 class FormsController extends Controller
 {
@@ -96,50 +96,40 @@ class FormsController extends Controller
         ]);
         return back()->with('notification','Registrado correctamente');
     }
-    public function ApproveWorkPermit(Request $request, $WorkPermitId, $off)
+    public function ApproveWorkPermit(Request $request, $WorkPermitId)
     {
 
         $UserId =auth()->user()->id;
+        $User = User::find($UserId);
         $approvepermit = WorkPermit::findOrFail($WorkPermitId);
 
-        $offnotification= Notification::where('workpermit_id',$WorkPermitId);
-        $offnotification-> update
-        ([
-            'v'=>$off,
-        ]);
+        // hasRole(['super-admin','coordinador','coordinador-calidad',
+        //                                'admin','coordinador-rrhh',
+        //                              ]))
 
-
-        if (auth()->user()->role->id  ==4 ||
-            auth()->user()->role->id ==3 ||
-            auth()->user()->role->id ==2)
-        {
-
-           if (auth()->user()->role->id==4) {
+           if ($User->hasRole(['coordinador','coordinador-calidad','coordinador-rrhh'])) {
                $approvepermit -> update ([
                    'coordigree_id'=> $UserId,
                    'coordigree'=>$request['approvepermit'],
                ]);
-
-               }elseif (auth()->user()->role->id==3){
+               }elseif ($User->hasRole(['director-medico','director-financiero'])){
                    $approvepermit -> update ([
                        'directigree_id'=>$UserId,
                        'directigree'=>$request['approvepermit'],
                    ]);
-                   }elseif (auth()->user()->role->id==2){
+                   }elseif ($User->hasRole('gerencia')){
                        $approvepermit -> update ([
                            'managigree_id'=>$UserId,
                            'managigree'=>$request['approvepermit'],
                        ]);
+       }else{
+        return back()->with('error','No posee el rol para realizar esta acción');
        }
-
-        }else {
-            return back()->with('error','No posee el rol para hacer dicha acción');
-              }
             if ($request['approvepermit']==0) {
                 return back()->with('notification','Permiso [denegado] correctamente');
 
             }else {
-                return back()->with('notification','Permiso [aprovadó] correctamente');
+                return back()->with('notification','Permiso [aprobado] correctamente');
             }
     }
     public function ListChangeTurn()

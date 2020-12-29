@@ -1,7 +1,6 @@
 <?php
 
 namespace App\Http\Controllers;
-use App\Notification;
 use App\TypePermit;
 use App\WorkVacation;
 use Carbon\Carbon;
@@ -162,7 +161,7 @@ class FormsController extends Controller
           'typepermit_id'=>$request['typepermit'],
           'user_id'=>auth()->user()->id,
       ]);
-
+//
         event(new WorkPermitEvent($workpermit));
 
     //   User::all()->except($workpermit->user_id)

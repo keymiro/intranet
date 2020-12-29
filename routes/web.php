@@ -122,7 +122,7 @@ Route::group(['namespace' => 'Admin'], function () {
         ->name('details.WorkPermit');
     route::get('/work-permit/{id}/register','FormsController@RegisterWorkPermit')
         ->name('register.WorkPermit');
-    route::patch('/work-permit/approve/{WorkPermitId}/off/{off}','FormsController@ApproveWorkPermit')
+    route::patch('/work-permit/approve/{WorkPermitId}/','FormsController@ApproveWorkPermit')
         ->name('approve.WorkPermit');
         /**cambio de turno */
     Route::get('/list-change-turn', 'FormsController@ListChangeTurn')

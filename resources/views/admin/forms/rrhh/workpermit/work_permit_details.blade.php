@@ -149,7 +149,7 @@
                                             @endswitch
                                         </td>
                                         <td><strong>Dirección:</strong>
-                                            @if ($w->timepermit > 24)
+                                            @if ($w->timepermit > 24 )
                                                 @switch($w->directigree)
                                                     @case(null)
                                                     Esperando respuesta
@@ -186,13 +186,9 @@
                                 </tbody>
                             </table>
                         </div>
-                        @if(auth()->user()->people->area_id!=3)
-                            @if (auth()->user()->is_Admin||
-                             auth()->user()->is_Gerente||
-                             auth()->user()->is_Coord||
-                             auth()->user()->is_Director)
+                            @can('approve_request')
                                 <div class="col-3">
-                                        <form action="{{route('approve.WorkPermit',['WorkPermitId'=>$w->id,'off'=>0])}}" method="post">
+                                        <form action="{{route('approve.WorkPermit',['WorkPermitId'=>$w->id])}}" method="post">
                                             @csrf @method('PATCH')
                                             <label for="approvepermit" class="my-2 font-weight-bold">Desea aprobar el permiso?</label>
                                             <select name="approvepermit" class="form-control mb-2 " id="approvepermit">
@@ -203,8 +199,7 @@
                                             <button class="btn btn-success">aceptar</button>
                                         </form>
                                 </div>
-                            @endif
-                        @endif
+                            @endcan
                     </div>
                 </div>
             </div>
