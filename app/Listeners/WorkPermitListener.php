@@ -38,17 +38,34 @@ class WorkPermitListener
            ->each(function(User $user)use($event)
             {
                 $time_permit=$event->workpermit->timepermit;
-
+                $area_id =$event->workpermit->user->people->area_id;
                 if($time_permit <=24)
                 {
                     if($user->hasRole(['super-admin','coordinador','coordinador-calidad',
-                                       'admin','coordinador-rrhh',
-                                     ])){
-                                        Notification::send($user, new WorkPermitNotification($event->workpermit));
-                                         }
+                                       'admin','coordinador-rrhh',]) && $area_id==$user->people->area_id)
+                    {
+                         Notification::send($user, new WorkPermitNotification($event->workpermit));
+                    }
                     }elseif($time_permit >24 && $time_permit <= 48)
                     {
-                        if($user->hasRole(['super-admin','coordinador','director-financiero',
+                        //   Manda la notificacion al coordinador
+                            if($user->hasRole(['super-admin','coordinador','coordinador-calidad',
+                                       'admin','coordinador-rrhh',]) && $area_id==$user->people->area_id)
+                            {
+                                Notification::send($user, new WorkPermitNotification($event->workpermit));
+                            }
+                        // valida si el funcionario es administrativo o asistencial
+                            if($event->workpermit->user->type_func ==1)
+                            {
+                                    if($user->hasRole('director-financiero')){
+                                        Notification::send($user, new WorkPermitNotification($event->workpermit));
+                                        }
+                            }else{
+                                    if($user->hasRole('director-medico')){
+                                        Notification::send($user, new WorkPermitNotification($event->workpermit));
+                                        }
+                            }
+                        if($user->hasRole(['super-admin','coordinador',
                                     'director-medico','director-financiero','coordinador-calidad',
                                     'admin','coordinador-rrhh',
                                     ])){
@@ -56,10 +73,26 @@ class WorkPermitListener
                                         }
                             }elseif($time_permit  > 48)
                             {
-                                if($user->hasRole(['super-admin','coordinador','director-financiero',
-                                'director-medico','director-financiero','coordinador-calidad',
-                                'admin','coordinador-rrhh','gerencia ',
-                                ])){
+                                    //   Manda la notificacion al coordinador
+                                if($user->hasRole(['super-admin','coordinador','coordinador-calidad',
+                                       'admin','coordinador-rrhh',]) && $area_id==$user->people->area_id)
+                                {
+                                    Notification::send($user, new WorkPermitNotification($event->workpermit));
+                                }
+                                // valida si el funcionario es administrativo o asistencial
+                                if($event->workpermit->user->type_func ==1)
+                                {
+                                        if($user->hasRole('director-financiero')){
+                                            Notification::send($user, new WorkPermitNotification($event->workpermit));
+                                            }
+                                }else{
+                                        if($user->hasRole('director-medico')){
+                                            Notification::send($user, new WorkPermitNotification($event->workpermit));
+                                            }
+                                }
+
+                                //   Manda la notificacion al gerente
+                                if($user->hasRole(['gerencia'])){
                                         Notification::send($user, new WorkPermitNotification($event->workpermit));
                                     }
                             }

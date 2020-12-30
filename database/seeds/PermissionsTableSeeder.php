@@ -78,6 +78,7 @@ class PermissionsTableSeeder extends Seeder
         Permission::create(['name' => 'notify_event_adverse']);
         Permission::create(['name' => 'notify_change_turn']);
         Permission::create(['name' => 'notify_vacation']);
+        Permission::create(['name'=>'approve_request']);
 
         //lista de roles
         $super_admin = Role::create(['name'=>'super-admin']);

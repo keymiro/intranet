@@ -26,6 +26,10 @@ class FormsController extends Controller
             ->only('RegisterChangeturn');
         $this->middleware('permission:work_permit_index')
             ->only('ListWorkPermit','DetailsWorkPermit');
+        $this->middleware('permission:approve_request')
+            ->only('ApproveWorkPermit');
+        $this->middleware('permission:register_work_permit')
+            ->only('RegisterWorkPermit');
         $this->middleware('permission:event_adverse_index')
             ->only('index','DetailsAdverseEnvents');
         $this->middleware('permission:event_adverse_asing')
@@ -66,7 +70,6 @@ class FormsController extends Controller
         $event= AdverseEvent::with('user','user.people','user.people.area','location')
             ->where( 'id',$id)
             ->get();
-
         $pdf = PDF::loadView('admin.forms.quality.ExportAdverseEnvent',
             compact('event','title'));
         return $pdf->stream('ExportAdverseEnvent.pdf');
@@ -89,7 +92,6 @@ class FormsController extends Controller
     public function RegisterWorkPermit($id)
     {
         $registerWorkPermit = WorkPermit::findOrFail($id);
-
         $registerWorkPermit -> update
         ([
             'rdate'=>Carbon::now(),
@@ -196,7 +198,7 @@ class FormsController extends Controller
 
             }elseif (auth()->user()->role->id==3) {
                 $workvacation->update([
-                    'directigree_id' => $UserId,
+                    'directigree_id' => auth()->user()->id,
                     'directigree' => $request['approvevacation'],
                     'v' => $off,
                 ]);

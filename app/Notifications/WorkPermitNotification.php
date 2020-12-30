@@ -63,6 +63,7 @@ class WorkPermitNotification extends Notification
             'name_user'=> $this->workpermit->user->people->names,
             'lastname_user'=> $this->workpermit->user->people->lastnames,
             'time_permit'=>$this->workpermit->timepermit,
+            'area_id'=>$this->workpermit->user->people->area_id,
             'type'=> 'permiso_laboral',
             'time'=> Carbon::now()->diffForHumans(),
         ];
