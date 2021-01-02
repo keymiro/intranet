@@ -61,14 +61,16 @@
             aria-expanded="false"
             aria-controls="collapseExample">
         <i class="fas fa-bars"></i>
-        Listar cambios de turnos solicitados
+        Listar cambios de turnos
     </button>
     <div class="collapse my-4" id="changeturn">
-        <h3>Cambios de turnos</h3>
+        <h3>Cambios de turnos</h3><hr>
+
         <input class="form-control col-4 m light-table-filter mb-4"
                data-table="order-table1"
                type="text"
                placeholder="Buscador general">
+    <h5>Solicitados</h5>
         <table class="table table-striped table-bordered
     table-hover shadow rounded  sortable order-table1">
             <thead>
@@ -81,6 +83,43 @@
             </thead>
             <tbody>
             @forelse($changeturn as $c)
+                <td>{{$c->user->people->names}}</td>
+                <td>{{$c->datechangeturn}}</td>
+                <td>{{$c->created_at->diffForHumans()}}</td>
+                <td>
+                    <a class="btn btn-primary mb-2 text-light"
+                       href="{{route('ChangeTurn.detailsc',$c->id)}}">
+                        Ver
+                    </a>
+                </td>
+                </tr>
+
+            @empty
+                <p>No se encontraron resultados</p>
+            @endforelse
+
+            </tbody>
+        </table>
+        {{ $changeturn->links() }}
+        <br>
+        {{-------- para aprobar------------- --}}
+        <input class="form-control col-4 m light-table-filter mb-4"
+               data-table="order-table9"
+               type="text"
+               placeholder="Buscador general">
+    <h5>Para aprobar</h5>
+        <table class="table table-striped table-bordered
+    table-hover shadow rounded  sortable order-table9">
+            <thead>
+            <tr>
+                <th scope="col">Solicita</th>
+                <th scope="col">Fecha programada del turno</th>
+                <th scope="col">Solicitado</th>
+                <th scope="col">Detalles</th>
+            </tr>
+            </thead>
+            <tbody>
+            @forelse($aprovechangeturn as $c)
                 <td>{{$c->user->people->names}}</td>
                 <td>{{$c->datechangeturn}}</td>
                 <td>{{$c->created_at->diffForHumans()}}</td>

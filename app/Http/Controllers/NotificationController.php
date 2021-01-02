@@ -25,5 +25,11 @@ class NotificationController extends Controller
         auth()->user()->unreadNotifications->where('id',$id)->markAsRead();
         return back()->with('notification','Se ha marcado la notificación como leída');
     }
+    public function DeleteNotification($id)
+    {
+       $n = auth()->user()->readNotifications->where('id',$id)->first();
+       $n->delete();
+        return back()->with('notification','Se ha eliminado la notificación');
+    }
 
 }

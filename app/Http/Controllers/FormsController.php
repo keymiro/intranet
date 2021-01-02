@@ -13,7 +13,9 @@ use App\User;
 use App\Area;
 use App\ChangeTurn;
 use App\Events\WorkPermitEvent;
+use App\Notifications\ChangeTurnNotification;
 use App\Notifications\WorkPermitNotification;
+use App\People;
 use App\WorkPermit;
 use Illuminate\Support\Facades\Auth;
 
@@ -128,9 +130,13 @@ class FormsController extends Controller
                             ->paginate(5);
     $workvacation= WorkVacation::where('user_id',auth()->user()->id)
             ->paginate(5);
+    $aprovechangeturn=ChangeTurn::where('user_change_id',auth()->user()->id)
+           ->paginate(5);
+
       return view('forms.list_request',
-          compact('workpermit','changeturn','workvacation'));
+          compact('workpermit','changeturn','workvacation','aprovechangeturn'));
     }
+
     public function  DetailsWorkPermit($id)
     {
         WorkPermit::findOrFail($id);
@@ -163,93 +169,56 @@ class FormsController extends Controller
       ]);
 //
         event(new WorkPermitEvent($workpermit));
-
-    //   User::all()->except($workpermit->user_id)
-    //              ->each(function(User $user) use ($workpermit)
-    //              {
-    //               $user->notify(new WorkPermitNotification($workpermit));
-    //              });
-
-
-
-
-/*    if ($request['timepermit']<=24) {
-    $CoordId = 4;
-
-        Notification::create ([
-            'notification'=>'Permiso Laboral',
-            'workpermit_id'=>$workpermit->id,
-            'role_id'=>$CoordId,
-        ]);
-
-      }elseif ($request['timepermit']>24 && $request['timepermit']<=48){
-
-        $CoordId = 4;
-
-        Notification::create ([
-            'notification'=>'Permiso Laboral',
-            'workpermit_id'=>$workpermit->id,
-            'role_id'=>$CoordId,
-        ]);
-
-        $DirectId= 3;
-        Notification::create ([
-            'notification'=>'Permiso Laboral',
-            'workpermit_id'=>$workpermit->id,
-            'role_id'=>$DirectId,
-        ]);
-
-
-      }elseif ($request['timepermit']>48){
-
-
-        Notification::create ([
-            'notification'=>'Permiso Laboral',
-            'workpermit_id'=>$workpermit->id,
-            'role_id'=>4,
-        ]);
-
-
-        Notification::create ([
-            'notification'=>'Permiso Laboral',
-            'workpermit_id'=>$workpermit->id,
-            'role_id'=>3,
-        ]);
-
-        Notification::create ([
-            'notification'=>'Permiso Laboral',
-            'workpermit_id'=>$workpermit->id,
-            'role_id'=>2,
-        ]);
-
-      }*/
-
         return back()->with('notification','Solicitud enviada correctamente');
     }
 /***cambio de turno */
     public function PostChangeTurn(Request $request)
     {
-      ChangeTurn::create ([
-            'numberchangeturn'=>$request['numberchangeturn'],
-            'datechangeturn'=>$request['datechangeturn'],
-            'tchangeturn'=>$request['tchangeturn'],
-            'namechange'=>$request['namechange'],
-            'celchange'=>$request['celchange'],
-            'returnchangeturn'=>$request['returnchangeturn'],
-            't1changeturn'=>$request['t1changeturn'],
-            'observations'=>$request['observations'],
-            'user_id'=>auth()->user()->id,
-            'igree'=>1,
-        ]);
-        return back()->with('notification','Solicitud enviada correctamente');
+    $ccchange=User::select('users.id')
+                  ->join('peoples as p','p.id','=','users.people_id')
+                  ->where('p.document',$request['ccchange'])
+                  ->first();
+
+    if(!empty($ccchange))
+        {
+         $changeturn= ChangeTurn::create ([
+                'numberchangeturn'=>$request['numberchangeturn'],
+                'datechangeturn'=>$request['datechangeturn'],
+                'tchangeturn'=>$request['tchangeturn'],
+                'returnchangeturn'=>$request['returnchangeturn'],
+                't1changeturn'=>$request['t1changeturn'],
+                'observations'=>$request['observations'],
+                'user_id'=>auth()->user()->id,
+                'igree'=>1,
+                'user_change_id'=>$ccchange['id'],
+            ]);
+
+            $ccchange->notify(new ChangeTurnNotification($changeturn));
+            return back()->with('notification','Solicitud enviada correctamente');
+        }else{
+            return back()->with('error','Este usuario no existe en el sistema');
+        }
     }
 
     public function DetailsChangeTurn($id)
     {
         ChangeTurn::findOrFail($id);
-        $changeturn=ChangeTurn::where('id',$id)->get();
+        $changeturn=ChangeTurn::where('id',$id)->first();
         return view('forms.rrhh.change_turn_details',
             compact('changeturn'));
+    }
+    public function ApproveChangeTurn(Request $request, $id)
+    {
+        $approve= ChangeTurn::findOrFail($id);
+        $approve->update
+        ([
+            'user_change_igree'=>$request['approvechangeturn'],
+        ]);
+        if ($request['approvechangeturn']==1){
+            return back()->with('notification','Cambio de turno [aprobadó] correctamente');
+        }else{
+            return back()->with('notification','Cambio de turno [denegado] correctamente');
+        }
     }
 
     public function PostWorkVacation(Request $request)

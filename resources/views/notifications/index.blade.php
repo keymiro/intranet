@@ -6,61 +6,63 @@
             {{ session('status') }}
         </div>
     @endif
-    <div class="container">
+
         <div class="card-header bg-primary text-light my-2 shadow-sm">
             <h3><i class="fas fa-inbox"></i> Notificaciones</h3>
         </div>
         @include('partials.notification')
            <br>
-           <div class="cantainer">
+
             <a href="{{route('Read.all.Notifications')}}" class="float-right btn btn-outline-primary">
                 Marcar todo leído
             </a>
-            <p class="text-muted"> Nuevas</p>
-                <div class="row">
+    <div class="row">
+            <div class="col-sm-6">
+                <p class="text-muted"> Nuevas</p>
+                <ul class="list-group">
                     @forelse ($unreadnotify  as $n )
-                        <div class="card  my-2 mx-4">
-                                <div class="card-body ">
-                                    <div class="container">
-                                        <div class="row">
-                                            <a href="{{route('details.WorkPermit',$n->data['workpermit_id'])}}">
-                                                {{$n->data['name_user']}}
-                                                {{$n->data['lastname_user']}} ha solicitado un<br>
-                                                {{$n->data['title']}}<br>
-                                                <small>{{$n->created_at->diffForHumans()}}</small><br>
-                                            </a>
-                                            <a href="{{route('Read.Notifications', $n->id)}}" class="text-muted float-right mx-4">
-                                                <i class="fas fa-check"></i> Marcar Leído
-                                            </a><br>
-                                        </div>
-                                    </div>
-                                </div>
-                        </div>
+                        <li class="list-group-item">
+                            <a href="{{$n->data['link']}}">
+                            {{$n->data['name_user']}}
+                            {{$n->data['lastname_user']}} ha solicitado un<br>
+                            {{$n->data['title']}}
+                           </span>
+                            <small class="text-muted">{{$n->created_at->diffForHumans()}}</small><br>
+                            </a>
+                            <a href="{{route('Read.Notifications', $n->id)}}" class="text-muted float-right mx-4">
+                                <i class="fas fa-check"></i> Marcar Leído
+                            </a>
+                        </li>
                     @empty
-                        <span class="my-2 mx-4 text-muted text-sm-right">No hay notificaciones nuevas</span>
+                        <span class="text-muted">No hay notificaciones nuevas</span>
                     @endforelse
-                </div><br>
-               <p class="text-muted">Anteriores</p>
-               <div class="row">
+                </ul>
+            </div>
+        <div class="col-sm-6">
+            <p class="text-muted">Anteriores</p>
+                <ul class="list-group">
                     @forelse ($readnotify as $n )
-                        <div class="card my-2 mx-4">
-                                <div class="card-body">
-                                    <div class="container">
-                                        <div class="row">
-                                            <a href="{{route('details.WorkPermit',$n->data['workpermit_id'])}}">
-                                                {{$n->data['name_user']}}
-                                                {{$n->data['lastname_user']}} ha solicitado un<br>
-                                                {{$n->data['title']}}<br>
-                                                <small>{{$n->created_at->diffForHumans()}}</small><br>
-                                            </a><br>
-                                        </div>
-                                    </div>
-                                </div>
-                        </div>
+                        <li class="list-group-item">
+                            <a href="{{$n->data['link']}}">
+                                {{$n->data['name_user']}}
+                                {{$n->data['lastname_user']}} ha solicitado un
+                                {{$n->data['title']}} -
+                                <small class="text-muted">{{$n->created_at->diffForHumans()}}</small>
+                            </a>
+                            <form action="{{route('destroy.Notifications',$n->id)}}" method="POST" class="float-right">
+                                @csrf @method('DELETE')
+                                <button class="btn btn-danger btn-sm"
+                                    data-toggle="tooltip"
+                                    data-placement="top"
+                                    title="Eliminar Permanentemente">X
+                                </button>
+                            </form>
+                        </li>
                     @empty
-                    <span class="my-2 mx-4 text-muted text-sm-right">No hay notificaciones leídas</span>
+                        <span class="text-muted">No hay notificaciones leídas</span>
                     @endforelse
-               </div>
+                </ul>
         </div>
     </div>
+
 @endsection

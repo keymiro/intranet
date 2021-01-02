@@ -2,25 +2,24 @@
 
 namespace App\Notifications;
 
-use App\WorkPermit;
-use Carbon\Carbon;
 use Illuminate\Bus\Queueable;
+use Carbon\Carbon;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Notification;
 
-class WorkPermitNotification extends Notification
+class ChangeTurnNotification extends Notification implements ShouldQueue
 {
     use Queueable;
-
+   public  $changeturn;
     /**
      * Create a new notification instance.
      *
      * @return void
      */
-    public function __construct(WorkPermit $workPermit)
+    public function __construct( $changeturn)
     {
-        $this->workpermit = $workPermit;
+        $this->changeturn= $changeturn;
     }
 
     /**
@@ -57,14 +56,12 @@ class WorkPermitNotification extends Notification
     public function toArray($notifiable)
     {
         return [
-            'title' =>'Permiso Laboral',
-            'link' => route('details.WorkPermit',$this->workpermit->id),
-            'user_id' => $this->workpermit->user_id,
-            'name_user'=> $this->workpermit->user->people->names,
-            'lastname_user'=> $this->workpermit->user->people->lastnames,
-            'time_permit'=>$this->workpermit->timepermit,
-            'area_id'=>$this->workpermit->user->people->area_id,
-            'type'=> 'permiso_laboral',
+            'title' =>'Cambio de turno',
+            'link' => route('ChangeTurn.detailsc',$this->changeturn->id),
+            'user_id' => $this->changeturn->user_id,
+            'name_user'=> $this->changeturn->user->people->names,
+            'lastname_user'=> $this->changeturn->user->people->lastnames,
+            'type'=> 'cambio_de_turno',
             'time'=> Carbon::now()->diffForHumans(),
         ];
     }

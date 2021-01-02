@@ -143,7 +143,9 @@ class FormsController extends Controller
     public function DetailsChangeTurn($id)
     {
        ChangeTurn::findOrFail($id);
-       $changeturn=ChangeTurn::where('id',$id)->get();
+       $changeturn=ChangeTurn::where('id',$id)
+                 ->with('user', 'change_user')
+                 ->first();
         return view('admin.forms.rrhh.changeturn.change_turn_details',
         compact('changeturn'));
     }

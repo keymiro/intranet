@@ -10,7 +10,7 @@ use Spatie\Permission\Traits\HasRoles;
 class User extends Authenticatable
 {
     use HasRoles;
-  
+
     use Notifiable;
 
     /**
@@ -82,7 +82,10 @@ class User extends Authenticatable
         return $this->hasMany('App\WorkPermit');
     }
     public function changeturn(){
-        return $this->hasMany('App\ChangeTurn');
+        return $this->hasMany(ChangeTurn::class,'user_id');
+    }
+    public function changeturn_user(){
+        return $this->hasMany(ChangeTurn::class,'user_change_id');
     }
     public function workvacation(){
         return $this->hasMany(WorkPermit::class);

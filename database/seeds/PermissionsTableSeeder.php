@@ -103,7 +103,7 @@ class PermissionsTableSeeder extends Seeder
             'archive_index','archive_create','archive_edit','archive_destroy',
             'permission_index','permission_create','permission_edit','permission_destroy',
             'permission_assign','show_role_has_permisssion','remove_role_has_permisssion',
-            'permission_roles_index',
+            'permission_roles_index','user_support_index',
             'rol_index','rol_create','rol_edit','rol_destroy',
             'administrar_coordinacion','correspondence_index','approve_request',
             'questionnaire_present_index','questionnaire_present_create','questionnaire_present_result'

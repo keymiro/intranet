@@ -21,8 +21,13 @@ Route::post('/Solicitud', 'FormsController@PostReport');
 route::get('/trazabilidad', 'FormsController@ListRequest')->name('ListRequest');
 route::get('/trazabilidad/detalles-permiso-laboral/{id}', 'FormsController@DetailsWorkPermit')
     ->name('detailsworkpermit.c');
+    //**cambio de turno */
 Route::get('/trazabilidad/detalle-cambio-turno/{id}', 'FormsController@DetailsChangeTurn')
     ->name('ChangeTurn.detailsc');
+route::patch('/trazabilidad/detalle-cambio-turno/aprobar/{ChangeTurnId}','FormsController@ApproveChangeTurn')
+        ->name('ChangeTurn.approve');
+
+//***vacaciones */
 Route::get('/trazabilidad/detalle-vacaciones/{id}', 'FormsController@DetailsWorkVacation')
     ->name('WorkVacation.detailsc');
 route::get('/config', 'ConfigController@Index')->name('config');
@@ -54,6 +59,8 @@ route::get('/user_support','UserSupportController@index')
     ->name('Read.all.Notifications');
     route::get('/notificacion/read/{id}', 'NotificationController@readNotification')
     ->name('Read.Notifications');
+    route::delete('/notificacion/delete/{id}', 'NotificationController@DeleteNotification')
+    ->name('destroy.Notifications');
 
 Route::group(['namespace' => 'Admin'], function () {
     /*--------------------------rutas usuario-----------------------------------------*/
@@ -131,7 +138,7 @@ Route::group(['namespace' => 'Admin'], function () {
     ->name('ChangeTurn.details');
     route::get('/change-turn/register/{id}','FormsController@RegisterChangeturn')
         ->name('register.ChangeTurn');
-    route::patch('/change-turn/approve/{ChangeTurnId}/off/{off}','FormsController@ApproveChangeTurn')
+    route::patch('/change-turn/approve/{ChangeTurnId}','FormsController@ApproveChangeTurn')
         ->name('approve.ChangeTurn');
     /***vacaciones */////
     route::get('/list-work-vacation','FormsController@listWorkVacation')

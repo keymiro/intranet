@@ -33,20 +33,13 @@
             </div>
         </div>
         <div class="form-group">
-          <label for="namechange">Nombre quien reemplaza</label>
-          <input type="text" name="namechange" id="namechange"
+          <label for="ccchange">Cédula quien reemplaza</label>
+          <input type="text" name="ccchange" id="ccchange"
           class="form-control"
-          placeholder="Nombre quien reemplaza"
+          placeholder="Cédula quien reemplaza"
            required>
         </div>
         <div class="form-group">
-            <label for="celchange">Celular quien reemplaza</label>
-            <input type="number" name="celchange" id="celchange"
-            class="form-control"
-            placeholder="Celular quien reemplaza"
-             required>
-          </div>
-          <div class="form-group">
             <div class="row">
                 <div class="col">
                    <label for="returnchangeturn"> Fecha devolución de turno </label>

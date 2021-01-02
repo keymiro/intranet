@@ -18,8 +18,6 @@ class CreateChangeTurnsTable extends Migration
             $table->string('numberchangeturn')->nullable();
             $table->date('datechangeturn')->nullable();
             $table->string('tchangeturn')->nullable();
-            $table->string('namechange')->nullable();
-            $table->string('celchange')->nullable();
             $table->date('returnchangeturn')->nullable();
             $table->string('t1changeturn')->nullable();
             $table->string('observations')->nullable();
@@ -27,6 +25,11 @@ class CreateChangeTurnsTable extends Migration
             $table->foreign('user_id')->references('id')->on('users');
             $table->string('igree')->nullable();
             $table->string('rdaterrhh')->nullable();
+            $table->unsignedBigInteger('user_change_id')->nullable();
+            $table->foreign('user_change_id')->references('id')->on('users');
+            $table->string('user_change_igree')->nullable();
+
+
 
             $table->unsignedBigInteger('coordigree_id')->nullable();
             $table->foreign('coordigree_id')->references('id')->on('users');

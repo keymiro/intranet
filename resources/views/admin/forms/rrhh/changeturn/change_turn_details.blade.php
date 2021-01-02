@@ -6,29 +6,28 @@
         </h3>
     </div>
     @include('partials.notification')
-    @foreach($changeturn as $c)
         <div class="container">
             <div class="card">
                 <div class="card-body">
                     <div class="row">
                         <div class="col">
-                            <p><strong>Fecha Solicitud:</strong> {{$c->created_at}} </p>
+                            <p><strong>Fecha Solicitud:</strong> {{$changeturn->created_at}} </p>
                         </div>
                         <div class="col">
-                            <p><strong> Número de cambios de turno:</strong> {{$c->numberchangeturn}}</p>
+                            <p><strong> Número de cambios de turno:</strong> {{$changeturn->numberchangeturn}}</p>
                         </div>
                         <div class="col">
                             <p><strong>Fecha recibido:</strong>
-                                @if($c->rdaterrhh==null)
+                                @if($changeturn->rdaterrhh==null)
                                     No hay recibido
                                 @else
-                                    {{$c->rdaterrhh}}
+                                    {{$changeturn->rdaterrhh}}
                                 @endif
                             </p>
                         </div>
                         <div class="col">
                          @hasrole('super-admin|admin|coordinador-rrrhh')
-                                <a class="btn btn-success" href="{{route('register.ChangeTurn', $c->id)}}">
+                                <a class="btn btn-success" href="{{route('register.ChangeTurn', $changeturn->id)}}">
                                     Recibido
                                 </a>
                          @endhasrole
@@ -40,16 +39,16 @@
                     <div class="row">
                         <div class="col">
                             <p><strong>Nombres: </strong>
-                                {{$c->user->people->names}}
+                                {{$changeturn->user->people->names}}
                             </p>
                         </div>
                         <div class="col">
                             <p><strong>Apellidos:</strong>
-                                {{$c->user->people->lastnames}}
+                                {{$changeturn->user->people->lastnames}}
                             </p>
                         </div>
                         <div class="col">
-                            <p><strong>Cel:</strong> {{$c->user->people->phone}} </p>
+                            <p><strong>Cel:</strong> {{$changeturn->user->people->phone}} </p>
                         </div>
                     </div>
                     <div class="row">
@@ -64,8 +63,8 @@
                                 </thead>
                                 <tbody>
                                 <tr>
-                                    <td><strong>Fecha:</strong> {{$c->datechangeturn}} </td>
-                                    <td><strong>Horario:</strong> {{$c->tchangeturn}} </td>
+                                    <td><strong>Fecha:</strong> {{$changeturn->datechangeturn}} </td>
+                                    <td><strong>Horario:</strong> {{$changeturn->tchangeturn}} </td>
                                 </tr>
                                 </tbody>
                             </table>
@@ -73,12 +72,28 @@
                     </div>
                     <hr>
                     <div class="row">
-                        <div class="col">
-                            <p><strong>Nombre quien reemplaza:</strong> {{$c->namechange}} </p>
-                        </div>
-                        <div class="col">
-                            <p><strong>Cel quien reemplaza:</strong> {{$c->celchange}} </p>
-                        </div>
+                        @if($changeturn->user_change_igree==null)
+                            <div class="col">
+                                <p class="text-warning"><strong>Nombre quien reemplaza:</strong> Esperando aprobación del reemplazante </p>
+                            </div>
+                            <div class="col">
+                                <p class="text-warning"><strong>Cel quien reemplaza:</strong> Esperando aprobación del reemplazante  </p>
+                            </div>
+                        @elseif($changeturn->user_change_igree==0)
+                            <div class="col">
+                                <p><strong>Nombre quien reemplaza:</strong>No aprobado</p>
+                            </div>
+                            <div class="col">
+                                <p><strong>Cel quien reemplaza:</strong> No aprobado </p>
+                            </div>
+                        @else
+                            <div class="col">
+                                <p><strong>Nombre quien reemplaza:</strong> {{$changeturn->change_user->people->names}} </p>
+                            </div>
+                            <div class="col">
+                                <p><strong>Cel quien reemplaza:</strong> {{$changeturn->change_user->people->phone}} </p>
+                            </div>
+                        @endif
                     </div>
                     <div class="row">
                         <div class="col">
@@ -92,8 +107,8 @@
                                 </thead>
                                 <tbody>
                                 <tr>
-                                    <td><strong>Fecha:</strong>{{$c->returnchangeturn}} </td>
-                                    <td><strong>Horario:</strong> {{$c->t1changeturn}} </td>
+                                    <td><strong>Fecha:</strong>{{$changeturn->returnchangeturn}} </td>
+                                    <td><strong>Horario:</strong> {{$changeturn->t1changeturn}} </td>
                                 </tr>
                                 </tbody>
                             </table>
@@ -103,7 +118,7 @@
                     <div class="row">
                         <div class="col">
                             <div class="border">
-                                <p class="my-2 mx-2"><strong>Observaciónes:</strong> {{$c->observations}}</p>
+                                <p class="my-2 mx-2"><strong>Observaciónes:</strong> {{$changeturn->observations}}</p>
                             </div>
                         </div>
                         <div class="col">
@@ -118,7 +133,7 @@
                                 <tbody>
                                 <tr>
                                     <td><strong>Coordinador de Área:</strong>
-                                        @switch($c->coordigree)
+                                        @switch($changeturn->coordigree)
                                             @case(null)
                                             Esperando respuesta
                                             @break
@@ -131,7 +146,7 @@
                                         @endswitch
                                     </td>
                                     <td><strong>Reemplaza:</strong>
-                                        @switch($c->changeigree)
+                                        @switch($changeturn->changeigree)
                                             @case(null)
                                             Esperando respuesta
                                             @break
@@ -149,7 +164,7 @@
                         </div>
                         @if(auth()->user()->people->area_id!=3)
                             <div class="col">
-                                <form action="{{route('approve.ChangeTurn',['ChangeTurnId'=>$c->id,'off'=>'0'])}}" method="post">
+                                <form action="{{route('approve.ChangeTurn',['ChangeTurnId'=>$changeturn->id,'off'=>'0'])}}" method="post">
                                     @csrf @method('PATCH')
                                     <label for="approvechangeturn" class="my-2 font-weight-bold">Desea aprobar el permiso?</label>
                                     <select name="approvechangeturn" class="form-control mb-2 " id="approvechangeturn">
@@ -165,5 +180,4 @@
                 </div>
             </div>
         </div>
-    @endforeach
-@endsection
+   @endsection
