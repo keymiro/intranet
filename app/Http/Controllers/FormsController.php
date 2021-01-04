@@ -168,7 +168,7 @@ class FormsController extends Controller
           'user_id'=>auth()->user()->id,
       ]);
 //
-        event(new WorkPermitEvent($workpermit));
+       dd(event(new WorkPermitEvent($workpermit)));
         return back()->with('notification','Solicitud enviada correctamente');
     }
 /***cambio de turno */
@@ -179,8 +179,7 @@ class FormsController extends Controller
                   ->where('p.document',$request['ccchange'])
                   ->first();
     $area_id=auth()->user()->people->area_id;
-    $hasRoleUser= User::all();
-    $u =$hasRoleUser->hasRole(['coordinador','coordinador-calidad','coordinador-rrhh']);
+
     $user = User::join('peoples as p','p.id','=','users.people_id')
                 ->where('p.area_id',$area_id)
                 ->get();
@@ -200,11 +199,15 @@ class FormsController extends Controller
             ]);
         //notifica a quien va a reemplazar el turno
             $ccchange->notify(new ChangeTurnNotification($changeturn));
-            //notifica al coordinador del area
-            if($u|| $user)
-            {
-                $user->notify(new ChangeTurnNotification($changeturn));
-            }
+            // notifica al coordinador del area
+
+                    if ($user->hasRole(['coordinador','coordinador-calidad','coordinador-rrhh']))
+                   {
+                    $user->notify(new ChangeTurnNotification($changeturn));
+                   }
+
+
+
                 return back()->with('notification','Solicitud enviada correctamente');
         }else{
             return back()->with('error','Este usuario no existe en el sistema');

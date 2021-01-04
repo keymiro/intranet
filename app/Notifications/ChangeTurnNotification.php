@@ -8,7 +8,7 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Notification;
 
-class ChangeTurnNotification extends Notification implements ShouldQueue
+class ChangeTurnNotification extends Notification 
 {
     use Queueable;
    public  $changeturn;
