@@ -159,12 +159,12 @@ class FormsController extends Controller
         ]);
         return back()->with('notification','Registrado correctamente');
     }
-    public function ApproveChangeTurn(Request $request,$ChangeTurnId,$off)
+    public function ApproveChangeTurn(Request $request,$ChangeTurnId)
     {
-        $offv = ChangeTurn::findOrFail($ChangeTurnId);
-        $offv->update
+        $approve = ChangeTurn::findOrFail($ChangeTurnId);
+        $approve->update
         ([
-            'v' => $off,
+
             'coordigree_id'=>auth()->user()->id,
             'coordigree'=>$request['approvechangeturn'],
         ]);

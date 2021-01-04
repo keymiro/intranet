@@ -146,7 +146,7 @@
                                         @endswitch
                                     </td>
                                     <td><strong>Reemplaza:</strong>
-                                        @switch($changeturn->changeigree)
+                                        @switch($changeturn->user_change_igree)
                                             @case(null)
                                             Esperando respuesta
                                             @break
@@ -154,7 +154,7 @@
                                             Denegado
                                             @break
                                             @case(1)
-                                            Aprobo
+                                            Aprobado
                                             @break
                                         @endswitch
                                     </td>
@@ -164,7 +164,7 @@
                         </div>
                         @if(auth()->user()->people->area_id!=3)
                             <div class="col">
-                                <form action="{{route('approve.ChangeTurn',['ChangeTurnId'=>$changeturn->id,'off'=>'0'])}}" method="post">
+                                <form action="{{route('approve.ChangeTurn',['ChangeTurnId'=>$changeturn->id])}}" method="post">
                                     @csrf @method('PATCH')
                                     <label for="approvechangeturn" class="my-2 font-weight-bold">Desea aprobar el permiso?</label>
                                     <select name="approvechangeturn" class="form-control mb-2 " id="approvechangeturn">

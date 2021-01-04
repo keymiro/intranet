@@ -178,7 +178,13 @@ class FormsController extends Controller
                   ->join('peoples as p','p.id','=','users.people_id')
                   ->where('p.document',$request['ccchange'])
                   ->first();
-
+    $area_id=auth()->user()->people->area_id;
+    $hasRoleUser= User::all();
+    $u =$hasRoleUser->hasRole(['coordinador','coordinador-calidad','coordinador-rrhh']);
+    $user = User::join('peoples as p','p.id','=','users.people_id')
+                ->where('p.area_id',$area_id)
+                ->get();
+            //    3 resolver envio de notificacion al coordinador
     if(!empty($ccchange))
         {
          $changeturn= ChangeTurn::create ([
@@ -192,9 +198,14 @@ class FormsController extends Controller
                 'igree'=>1,
                 'user_change_id'=>$ccchange['id'],
             ]);
-
+        //notifica a quien va a reemplazar el turno
             $ccchange->notify(new ChangeTurnNotification($changeturn));
-            return back()->with('notification','Solicitud enviada correctamente');
+            //notifica al coordinador del area
+            if($u|| $user)
+            {
+                $user->notify(new ChangeTurnNotification($changeturn));
+            }
+                return back()->with('notification','Solicitud enviada correctamente');
         }else{
             return back()->with('error','Este usuario no existe en el sistema');
         }
