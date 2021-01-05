@@ -167,8 +167,7 @@ class FormsController extends Controller
           'typepermit_id'=>$request['typepermit'],
           'user_id'=>auth()->user()->id,
       ]);
-//
-       dd(event(new WorkPermitEvent($workpermit)));
+      event(new WorkPermitEvent($workpermit));
         return back()->with('notification','Solicitud enviada correctamente');
     }
 /***cambio de turno */

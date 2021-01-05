@@ -2,8 +2,9 @@
     <a class="nav-link" data-toggle="dropdown" href="#">
       <i class="fas fa-bell"></i>
         @if (count(auth()->user()->unreadNotifications))
-        <span class="badge badge-warning">{{ count(auth()->user()->unreadNotifications) }}</span>
-
+            <span class="badge badge-danger">
+                {{ count(auth()->user()->unreadNotifications) }}
+            </span>
         @endif
       </span>
     </a>
