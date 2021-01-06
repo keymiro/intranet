@@ -109,7 +109,7 @@ class FormsController extends Controller
         //                                'admin','coordinador-rrhh',
         //                              ]))
 
-           if ($User->hasRole(['coordinador','coordinador-calidad','coordinador-rrhh'])) {
+        if ($User->hasRole(['coordinador','coordinador-calidad','coordinador-rrhh'])) {
                $approvepermit -> update ([
                    'coordigree_id'=> $UserId,
                    'coordigree'=>$request['approvepermit'],
@@ -187,22 +187,23 @@ class FormsController extends Controller
         return view('admin.forms.rrhh.workvacation.work_vacation_details',
             compact('workvacation'));
     }
-    public function ApproveWorkVacation(Request $request, $WorkVacationId, $off)
+    public function ApproveWorkVacation(Request $request, $WorkVacationId)
     {
         $workvacation = WorkVacation::findOrFail($WorkVacationId);
-
-        if (auth()->user()->role->id==4) {
+        $UserId =auth()->user()->id;
+        $User = User::find($UserId);
+        if ($User->hasRole(['coordinador','coordinador-calidad','coordinador-rrhh'])) {
                $workvacation -> update ([
                     'coordigree_id'=> auth()->user()->id,
                     'coordigree'=>$request['approvevacation'],
-                    'v'=>$off,
+
                 ]);
 
-            }elseif (auth()->user()->role->id==3) {
+            }elseif ($User->hasRole(['director-medico','director-financiero'])) {
                 $workvacation->update([
                     'directigree_id' => auth()->user()->id,
                     'directigree' => $request['approvevacation'],
-                    'v' => $off,
+
                 ]);
             }
 

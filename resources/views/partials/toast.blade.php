@@ -13,7 +13,7 @@
       @forelse (auth()->user()->unreadNotifications as $n)
         <a href="{{$n->data['link']}}" class="dropdown-item">
             {{$n->data['name_user']}}
-            {{$n->data['lastname_user']}} ha solicitado un <br>
+            {{$n->data['lastname_user']}} ha solicitado <br>
             {{$n->data['title']}} -
             <small class=" pull-right text-muted text-sm">{{ $n->created_at->diffForHumans() }}</small>
             <a href="{{route('Read.Notifications', $n->id)}}" class="dropdown-item">

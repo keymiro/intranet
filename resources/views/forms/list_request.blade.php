@@ -182,6 +182,6 @@
 
             </tbody>
         </table>
-        {{ $changeturn->links() }}
+        {{ $workvacation->links() }}
     </div>
 @endsection

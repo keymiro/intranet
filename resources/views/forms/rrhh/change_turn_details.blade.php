@@ -110,6 +110,7 @@
                     <div class="row">
                         <div class="col">
                             @can('approve_request')
+                            Aprobar como coordinador
                                 <div class="col">
                                     <form action="{{route('approve.ChangeTurn',['ChangeTurnId'=>$changeturn->id])}}" method="post">
                                         @csrf @method('PATCH')
@@ -125,6 +126,7 @@
                             @endcan
                             @if(auth()->user()->id==$changeturn->user_change_id)
                                 <div class="col">
+                                    Aprobar como reemplazante
                                     <form action="{{route('ChangeTurn.approve',['ChangeTurnId'=>$changeturn->id])}}" method="post">
                                         @csrf @method('PATCH')
                                         <label for="approvechangeturn" class="my-2 font-weight-bold">Desea aprobar el permiso?</label>

@@ -127,12 +127,9 @@
                                 </tbody>
                             </table>
                         </div>
-                        @if(auth()->user()->people->area_id!=3)
-                            @if (auth()->user()->is_Admin||
-                              auth()->user()->is_Coord||
-                             auth()->user()->is_Director)
+                        @can('approve_request')
                                 <div class="col-3">
-                                    <form action="{{route('approve.WorkVacation',['WorkVacationId'=>$w->id,'off'=>0])}}" method="post">
+                                    <form action="{{route('approve.WorkVacation',['WorkVacationId'=>$w->id])}}" method="post">
                                         @csrf @method('PATCH')
                                         <label for="approvevacation" class="my-2 font-weight-bold">Desea aprobar la solicitud?</label>
                                         <select name="approvevacation" class="form-control mb-2 " id="approvevacation">
@@ -143,8 +140,7 @@
                                         <button class="btn btn-success">aceptar</button>
                                     </form>
                                 </div>
-                            @endif
-                        @endif
+                        @endcan
                     </div>
                 </div>
             </div>

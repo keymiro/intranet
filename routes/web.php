@@ -145,7 +145,7 @@ Route::group(['namespace' => 'Admin'], function () {
         ->name('WorkVacation.list');
     route::get('/list-work-vacation/details/{id}','FormsController@DetailsWorkVacation')
         ->name('WorkVacation.Details');
-    route::patch('/work-vacation/approve/{WorkVacationId}/off/{off}','FormsController@ApproveWorkVacation')
+    route::patch('/work-vacation/approve/{WorkVacationId}','FormsController@ApproveWorkVacation')
         ->name('approve.WorkVacation');
    //*** archivos***//
     route::get('/archive','ArchiveController@IndexArchive')

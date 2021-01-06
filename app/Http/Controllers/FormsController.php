@@ -15,6 +15,7 @@ use App\ChangeTurn;
 use App\Events\WorkPermitEvent;
 use App\Notifications\ChangeTurnNotification;
 use App\Notifications\WorkPermitNotification;
+use App\Notifications\VacationNotification;
 use App\People;
 use App\WorkPermit;
 use Illuminate\Support\Facades\Auth;
@@ -234,7 +235,7 @@ class FormsController extends Controller
 
     public function PostWorkVacation(Request $request)
     {
-        WorkVacation::create
+       $vacation= WorkVacation::create
         ([
             'startdate'=>$request['startdate'],
             'returndate'=>$request['returndate'],
@@ -248,6 +249,30 @@ class FormsController extends Controller
             'user_id'=>auth()->user()->id,
             'igree'=>1,
         ]);
+        $area_id_send=auth()->user()->people->area_id;
+        $user_type=auth()->user()->type_func;
+        $user = User::all();
+        foreach ($user as $u )
+        {
+            // Validad que el area del funcionario y coordinador sean las mimas
+            // y valida que sea coordinador
+            if ($u->people->area_id ==$area_id_send &&
+                $u->hasRole(['coordinador','coordinador-calidad','coordinador-rrhh']) )
+                {
+                    $u->notify(new VacationNotification($vacation));
+                }
+                // Notifica al director correspondiente
+            if($user_type ==1)
+                {
+                    if($u->hasRole('director-financiero')){
+                            $u->notify(new VacationNotification($vacation));
+                        }
+                   }else{
+                    if($u->hasRole('director-medico')){
+                            $u->notify(new VacationNotification($vacation));
+                        }
+                }
+        }
         return back()->with('notification', 'Solicitud enviada correctamente');
     }
     public function  DetailsWorkVacation($id)
