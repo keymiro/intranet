@@ -17,6 +17,11 @@
             <br>
                 <i class="fas fa-thumbtack text-danger"></i>
                 {{auth()->user()->people->area->name}}
+                <hr>
+                <a href="#exampleModal"  data-toggle="modal" data-target="#exampleModal">
+                    Cambiar contraseña
+                </a>
+                @include('partials.modal_reset_pass')
         </div>
         <hr class=" my-0  shadow-sm">
         <div class="list-group list-group-flush ">
@@ -30,6 +35,7 @@
                 <i class="fas fa-home"></i>
                 Inicio
             </a>
+
             @role('admin|super-admin')
                 <div class="dropdown dropright">
                     <button type="button" class="list-group-item list-group-item-action  dropdown-toggle"
