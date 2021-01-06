@@ -71,7 +71,7 @@
                     <a class="dropdown-item {{request()->is('list-adverse-events')? 'active':'' }}"
                        href="{{route('AdverseEvent')}}">Eventos Adversos</a>
                     @endhasrole
-                    @hasrole('coordinador-rrrhh|super-admin|admin')
+                    @hasrole('coordinador-rrhh|super-admin|admin')
                     <a class="dropdown-item {{request()->is('list-work-permit')? 'active':'' }}"
                        href="{{route('list.WorkPermit')}}">Permiso Laboral</a>
 

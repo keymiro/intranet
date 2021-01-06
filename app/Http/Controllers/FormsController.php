@@ -177,13 +177,9 @@ class FormsController extends Controller
                   ->join('peoples as p','p.id','=','users.people_id')
                   ->where('p.document',$request['ccchange'])
                   ->first();
-    $area_id=auth()->user()->people->area_id;
-
-    $user = User::join('peoples as p','p.id','=','users.people_id')
-                ->where('p.area_id',$area_id)
-                ->get();
-            //    3 resolver envio de notificacion al coordinador
-    if(!empty($ccchange))
+    $area_id_send=auth()->user()->people->area_id;
+    $user = User::all();
+        if(!empty($ccchange))
         {
          $changeturn= ChangeTurn::create ([
                 'numberchangeturn'=>$request['numberchangeturn'],
@@ -199,13 +195,15 @@ class FormsController extends Controller
         //notifica a quien va a reemplazar el turno
             $ccchange->notify(new ChangeTurnNotification($changeturn));
             // notifica al coordinador del area
+                foreach ($user as $u )
+                {
 
-                    if ($user->hasRole(['coordinador','coordinador-calidad','coordinador-rrhh']))
-                   {
-                    $user->notify(new ChangeTurnNotification($changeturn));
-                   }
-
-
+                    if ($u->people->area_id ==$area_id_send &&
+                        $u->hasRole(['coordinador','coordinador-calidad','coordinador-rrhh']) )
+                        {
+                        $u->notify(new ChangeTurnNotification($changeturn));
+                        }
+                }
 
                 return back()->with('notification','Solicitud enviada correctamente');
         }else{

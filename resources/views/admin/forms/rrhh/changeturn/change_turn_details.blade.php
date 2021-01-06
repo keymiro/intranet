@@ -26,7 +26,7 @@
                             </p>
                         </div>
                         <div class="col">
-                         @hasrole('super-admin|admin|coordinador-rrrhh')
+                         @hasrole('super-admin|admin|coordinador-rrhh')
                                 <a class="btn btn-success" href="{{route('register.ChangeTurn', $changeturn->id)}}">
                                     Recibido
                                 </a>
@@ -162,7 +162,7 @@
                                 </tbody>
                             </table>
                         </div>
-                        @if(auth()->user()->people->area_id!=3)
+                        @can('approve_request')
                             <div class="col">
                                 <form action="{{route('approve.ChangeTurn',['ChangeTurnId'=>$changeturn->id])}}" method="post">
                                     @csrf @method('PATCH')
@@ -175,7 +175,7 @@
                                     <button class="btn btn-success">aceptar</button>
                                 </form>
                             </div>
-                        @endif
+                        @endcan
                     </div>
                 </div>
             </div>

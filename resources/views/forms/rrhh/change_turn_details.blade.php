@@ -109,20 +109,34 @@
 
                     <div class="row">
                         <div class="col">
+                            @can('approve_request')
+                                <div class="col">
+                                    <form action="{{route('approve.ChangeTurn',['ChangeTurnId'=>$changeturn->id])}}" method="post">
+                                        @csrf @method('PATCH')
+                                        <label for="approvechangeturn" class="my-2 font-weight-bold">Desea aprobar el permiso?</label>
+                                        <select name="approvechangeturn" class="form-control mb-2 " id="approvechangeturn">
+                                            <option value="">Seleccione una opción</option>
+                                            <option value="0">Denegar</option>
+                                            <option value="1">Aprobar</option>
+                                        </select>
+                                        <button class="btn btn-success">aceptar</button>
+                                    </form>
+                                </div>
+                            @endcan
                             @if(auth()->user()->id==$changeturn->user_change_id)
-                            <div class="col">
-                                <form action="{{route('ChangeTurn.approve',['ChangeTurnId'=>$changeturn->id])}}" method="post">
-                                    @csrf @method('PATCH')
-                                    <label for="approvechangeturn" class="my-2 font-weight-bold">Desea aprobar el permiso?</label>
-                                    <select name="approvechangeturn" class="form-control mb-2 " id="approvechangeturn">
-                                        <option value="">Seleccione una opción</option>
-                                        <option value="0">Denegar</option>
-                                        <option value="1">Aprobar</option>
-                                    </select>
-                                    <button class="btn btn-success">aceptar</button>
-                                </form>
-                            </div>
-                        @endif
+                                <div class="col">
+                                    <form action="{{route('ChangeTurn.approve',['ChangeTurnId'=>$changeturn->id])}}" method="post">
+                                        @csrf @method('PATCH')
+                                        <label for="approvechangeturn" class="my-2 font-weight-bold">Desea aprobar el permiso?</label>
+                                        <select name="approvechangeturn" class="form-control mb-2 " id="approvechangeturn">
+                                            <option value="">Seleccione una opción</option>
+                                            <option value="0">Denegar</option>
+                                            <option value="1">Aprobar</option>
+                                        </select>
+                                        <button class="btn btn-success">aceptar</button>
+                                    </form>
+                                </div>
+                            @endif
                         </div>
                         <div class="col">
                             <div class="border">
