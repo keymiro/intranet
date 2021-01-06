@@ -10,13 +10,13 @@
         <form action="" method="post">
             <div class="modal-body">
                 <div class="form-group">
-                    <input class="form-control" type="text" placeholder="Contraseña anterior">
+                    <input class="form-control" type="password" placeholder="Contraseña anterior">
                 </div>
                 <div class="form-group">
-                    <input class="form-control" type="text" placeholder="Nueva contraseña">
+                    <input class="form-control" type="password" placeholder="Nueva contraseña">
                 </div>
             <div class="form-group">
-                    <input class="form-control" type="text" placeholder="Confirmar nueva contraseña">
+                    <input class="form-control" type="password" placeholder="Confirmar nueva contraseña">
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
