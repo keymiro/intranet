@@ -52,6 +52,8 @@ route::get('/correspondencia','ArchiveController@IndexCorrespondence')
 
 route::get('/user_support','UserSupportController@index')
     ->name('user_support.index');
+route::patch('/user/{id}/edit','UserController@edit')
+    ->name('edit.user.client');
     /*** notificaciones */
    route::get('/notificaciones', 'NotificationController@index')
     ->name('index.all.Notifications');

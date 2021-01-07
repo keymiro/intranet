@@ -18,7 +18,8 @@
                 <i class="fas fa-thumbtack text-danger"></i>
                 {{auth()->user()->people->area->name}}
                 <hr>
-                <a href="#exampleModal"  data-toggle="modal" data-target="#exampleModal">
+                <a href="#exampleModal"  data-toggle="modal" class="text-muted "
+                    data-target="#exampleModal">
                     Cambiar contraseña
                 </a>
                 @include('partials.modal_reset_pass')
@@ -56,12 +57,7 @@
 
                 </div>
              @endrole
-        <!--            <a href="/ver" type="button"
-               class="{{request()->is('ver')? 'active':''}}
-            list-group-item list-group-item-action">
-            <i class="fas fa-eye"></i>
-            Ver incidencias
-        </a>-->
+
 
       @can('administrar_coordinacion')
             <div class="dropdown dropright">
