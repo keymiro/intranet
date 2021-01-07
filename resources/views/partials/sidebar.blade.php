@@ -8,25 +8,28 @@
                 {{auth()->user()->people->names}}
                 <br>{{auth()->user()->people->lastnames}}
             </h5>
-
+            @role('super-admin')
                 <i class="fas fa-user-tag text-warning"></i>
                 {{auth()->user()->roles()->pluck('name')->implode(' ') }}
             <br>
+            @endrole
                 <i class="fas fa-briefcase text-secondary"></i>
                 {{auth()->user()->people->jobtitle->title}}
             <br>
                 <i class="fas fa-thumbtack text-danger"></i>
                 {{auth()->user()->people->area->name}}
                 <hr>
-                <a href="#exampleModal"  data-toggle="modal" class="text-muted "
+                <small>
+                <a href="#exampleModal"  data-toggle="modal"
                     data-target="#exampleModal">
-                    Cambiar contraseña
+                    <i class="fas fa-key"></i> Cambiar contraseña
                 </a>
+            </small>
                 @include('partials.modal_reset_pass')
         </div>
         <hr class=" my-0  shadow-sm">
         <div class="list-group list-group-flush ">
-            <div class="list-group-item text-primary">
+            <div class="list-group-item text-muted">
                 <i class="fas fa-tachometer-alt"></i>
                 Dashboard
             </div>

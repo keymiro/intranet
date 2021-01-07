@@ -58,6 +58,7 @@ class PermissionsTableSeeder extends Seeder
         Permission::create(['name' => 'event_adverse_asing']);
 
         Permission::create(['name' => 'work_permit_index']);
+        Permission::create(['name' => 'register_work_permit']);
 
         Permission::create(['name' => 'change_turn_index']);
         Permission::create(['name' => 'change_turn_register']);
@@ -74,10 +75,6 @@ class PermissionsTableSeeder extends Seeder
         Permission::create(['name' => 'archive_edit']);
         Permission::create(['name' => 'archive_destroy']);
 
-        Permission::create(['name' => 'notify_work_permit']);
-        Permission::create(['name' => 'notify_event_adverse']);
-        Permission::create(['name' => 'notify_change_turn']);
-        Permission::create(['name' => 'notify_vacation']);
         Permission::create(['name'=>'approve_request']);
 
         //lista de roles
@@ -97,7 +94,7 @@ class PermissionsTableSeeder extends Seeder
             'questionnaire_index','questionnaire_create','questionnaire_edit','questionnaire_destroy',
             'question_index','question_create','question_edit','question_destroy','question_show',
             'event_adverse_index','event_adverse_asing',
-            'work_permit_index',
+            'work_permit_index','register_work_permit',
             'change_turn_index','change_turn_register',
             'vacation_index',
             'archive_index','archive_create','archive_edit','archive_destroy',
@@ -109,7 +106,7 @@ class PermissionsTableSeeder extends Seeder
             'questionnaire_present_index','questionnaire_present_create','questionnaire_present_result'
             ,'questionnaire_present_result_details','questionnaire_present_show',
             'questionnaire_result_index','traceability_index','form_index','form_send','vacation_index',
-            'notify_work_permit','notify_event_adverse','notify_change_turn','notify_vacation'
+
         ]);
         $funcionario->givePermissionTo([
             'archive_index','user_support_index','correspondence_index',
@@ -119,6 +116,46 @@ class PermissionsTableSeeder extends Seeder
         ]);
         $Gerencia->givePermissionTo([
             'work_permit_index','approve_request'
+        ]);
+        $secretaria->givePermissionTo([
+
+            'archive_index','archive_create','archive_edit','archive_destroy','correspondence_index',
+            'archive_index','user_support_index','correspondence_index','questionnaire_present_result',
+            'questionnaire_present_index','questionnaire_present_create','questionnaire_present_result_details',
+            'questionnaire_present_show','traceability_index','form_index','form_send','administrar_coordinacion'
+        ]);
+        $coordinador_rrhh->givePermissionTo([
+
+            'archive_index','archive_create','archive_edit','archive_destroy','correspondence_index',
+            'archive_index','user_support_index','correspondence_index','questionnaire_present_result',
+            'questionnaire_present_index','questionnaire_present_create','questionnaire_present_result_details',
+            'questionnaire_present_show','traceability_index','form_index','form_send','administrar_coordinacion'
+            ,'change_turn_register','change_turn_index','approve_request','vacation_index','work_permit_index',
+            'register_work_permit'
+        ]);
+        $coordinador_calidad ->givePermissionTo([
+
+            'archive_index','archive_create','archive_edit','archive_destroy','correspondence_index',
+            'archive_index','user_support_index','correspondence_index','questionnaire_present_result',
+            'questionnaire_present_index','questionnaire_present_create','questionnaire_present_result_details',
+            'questionnaire_present_show','traceability_index','form_index','form_send','administrar_coordinacion',
+            'approve_request','vacation_index','work_permit_index','event_adverse_index','event_adverse_asing'
+        ]);
+        $coordinador ->givePermissionTo([
+
+            'archive_index','archive_create','archive_edit','archive_destroy','correspondence_index',
+            'archive_index','user_support_index','correspondence_index','questionnaire_present_result',
+            'questionnaire_present_index','questionnaire_present_create','questionnaire_present_result_details',
+            'questionnaire_present_show','traceability_index','form_index','form_send','administrar_coordinacion',
+            'approve_request','vacation_index','work_permit_index',
+        ]);
+        $director_fin ->givePermissionTo([
+
+            'work_permit_index','approve_request','vacation_index'
+        ]);
+        $director_med ->givePermissionTo([
+
+            'work_permit_index','approve_request','vacation_index'
         ]);
 
         $user = User::find(1);
