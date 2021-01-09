@@ -26,7 +26,7 @@ class ResultQuestionnaireExport implements FromQuery,WithHeadings,ShouldAutoSize
 
     public function query()
     {
-      return  $query = DB::table('resultQuestionnaires AS rq')
+      return  $query = DB::table('resultquestionnaires AS rq')
             ->selectRaw('
                     rq.id AS id,
                     rq.score as Puntaje,
