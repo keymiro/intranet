@@ -1,4 +1,4 @@
-<title>Cuestionario | Intranet Casanare</title>
+<title>Atención al usuario | Intranet Casanare</title>
 @extends('layouts.app')
 @section('content')
     @include('partials.notification')
