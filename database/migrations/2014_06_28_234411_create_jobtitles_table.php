@@ -16,8 +16,8 @@ CreateJobtitlesTable extends Migration
     {
         Schema::create('jobtitles', function (Blueprint $table) {
             $table->id();
-            $table->string('title');
-            $table->string('description')->nullable();
+            $table->string('title')->comment('Nombre del cargo');
+            $table->string('description')->comment('Descripción del cargo')->nullable();
             $table->timestamps();
 
         });

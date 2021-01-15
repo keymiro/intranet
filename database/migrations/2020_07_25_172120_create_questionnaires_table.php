@@ -15,11 +15,11 @@ class CreateQuestionnairesTable extends Migration
     {
         Schema::create('questionnaires', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
-            $table->string('active')->default('1');
-            $table->integer('try')->onDelete('cascade');
-            $table->integer('time');
-            $table->unsignedBigInteger('user_id');
+            $table->string('name')->comment('nombre del cuestionario');
+            $table->string('active')->default('1')->comment('estado del cuestionario, 1 activo 0 inactivo');
+            $table->integer('try')->onDelete('cascade')->comment('número de intentos');
+            $table->integer('time')->comment('duración del cuestionario');
+            $table->unsignedBigInteger('user_id')->comment('usuario que crea el cuestionario');
             $table->foreign('user_id')
                 ->references('id')
                 ->on('users')->onDelete('cascade');

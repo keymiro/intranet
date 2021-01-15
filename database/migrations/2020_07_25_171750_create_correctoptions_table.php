@@ -15,7 +15,7 @@ class CreateCorrectoptionsTable extends Migration
     {
         Schema::create('correctoptions', function (Blueprint $table) {
             $table->id();
-            $table->string('option');
+            $table->string('option')->comment('almacena la opciones de las preguntas del módulo cuestionarios');
             $table->timestamps();
         });
     }

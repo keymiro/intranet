@@ -15,10 +15,10 @@ class CreateWorkVacationsTable extends Migration
     {
         Schema::create('work_vacations', function (Blueprint $table) {
             $table->id();
-            $table->date('startdate')->nullable();
-            $table->date('returndate')->nullable();
-            $table->date('fromdate')->nullable();
-            $table->date('untildate')->nullable();
+            $table->date('startdate')->nullable()->comment('Fecha inicio vacaciones');
+            $table->date('returndate')->nullable()->comment('Fecha de reanuación laborales');
+            $table->date('fromdate')->nullable()->comment('periodo de causacion desde');
+            $table->date('untildate')->nullable()->comment('periodo de causacion hasta');;
             $table->string('businessdays')->nullable();
             $table->string('requesteddays')->nullable();
             $table->string('pendingdays')->nullable();

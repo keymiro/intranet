@@ -15,8 +15,8 @@ class CreateTypePermitsTable extends Migration
     {
         Schema::create('type_permits', function (Blueprint $table) {
             $table->id();
-            $table->string('name')->nullable();
-            $table->string('description')->nullable();
+            $table->string('name')->nullable()->comment('nombre del tipo de permiso');
+            $table->string('description')->nullable()->comment('descipción del tipo de permiso');
             $table->timestamps();
         });
     }

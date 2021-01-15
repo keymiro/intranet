@@ -15,20 +15,20 @@ class CreateQuestionsTable extends Migration
     {
         Schema::create('questions', function (Blueprint $table) {
             $table->id();
-            $table->string('image')->nullable();
-            $table->string('statement');
-            $table->string('option_a');
-            $table->string('option_b');
-            $table->string('option_c');
-            $table->string('option_d');
+            $table->string('image')->nullable()->comment('almacena la imagen del cuestionario');
+            $table->string('statement')->comment('descripción de la pregunta');
+            $table->string('option_a')->comment('opcion a');
+            $table->string('option_b')->comment('opcion b');
+            $table->string('option_c')->comment('opcion c');
+            $table->string('option_d')->comment('opcion d');
 
             //foranea para opción correcta
-            $table->unsignedBigInteger('correctoption_id');
+            $table->unsignedBigInteger('correctoption_id')->comment('relaciona la opción correcta a la pregunta');
             $table->foreign('correctoption_id')
                 ->references('id')
                 ->on('correctoptions')->onDelete('cascade');
             //foranea para relacionar el formulario
-            $table->unsignedBigInteger('questionnaire_id');
+            $table->unsignedBigInteger('questionnaire_id')->comment('relaciona la pregunta al cuestionario');
             $table->foreign('questionnaire_id')
                 ->references('id')
                 ->on('questionnaires')->onDelete('cascade');

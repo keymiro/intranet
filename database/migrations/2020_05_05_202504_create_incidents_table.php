@@ -15,14 +15,14 @@ class CreateIncidentsTable extends Migration
     {
         Schema::create('incidents', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
-            $table->string('description');
+            $table->string('name')->comment('Nombre del incidente');
+            $table->string('description')->comment('descripción del incidente');
 
             //foranea para prioridades
-            $table->unsignedBigInteger('priority_id');
+            $table->unsignedBigInteger('priority_id')->comment('relaciona la prioridad al incidente');
             $table->foreign('priority_id')->references('id')->on('priorities');
 
-            $table->unsignedBigInteger('location_id');
+            $table->unsignedBigInteger('location_id')->comment('relaciona la ubicación al incidente');
             $table->foreign('location_id')->references('id')->on('locations');
 
             //foranea para cliente_id

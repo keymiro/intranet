@@ -15,12 +15,12 @@ class CreateRepetitionsTable extends Migration
     {
         Schema::create('repetitions', function (Blueprint $table) {
             $table->id();
-            $table->integer('quantity')->nullable();
-            $table->unsignedBigInteger('questionnaire_id');
+            $table->integer('quantity')->nullable()->comment('intentos del cuestionario');
+            $table->unsignedBigInteger('questionnaire_id')->comment('relaciona los intentos con el cuestionario');
             $table->foreign('questionnaire_id')
                 ->references('id')
                 ->on('questionnaires');
-            $table->unsignedBigInteger('user_id');
+            $table->unsignedBigInteger('user_id')->comment('relaciona el intento con el usuario');
             $table->foreign('user_id')
                 ->references('id')
                 ->on('users');
