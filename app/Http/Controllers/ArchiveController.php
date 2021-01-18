@@ -40,7 +40,7 @@ class ArchiveController extends Controller
     /*********************correspondencia********************************/
     public function IndexCorrespondence(Request $request)
     {
-        $name     = $request->get('name');
+        $name  = $request->get('name');
 
         $correspondence = Archive::select('*','archives.created_at','archives.name')
             ->join('areas as a', 'a.id','=','archives.area_id')

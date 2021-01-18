@@ -1,29 +1,29 @@
 <title>Intranet Casanare</title>
 @extends('layouts.app')
 @section('content')
-    @include('partials.notification')
-    <!-- Main jumbotron for a primary marketing message or call to action -->
-    <div class="jumbotron bg-secondary shadow rounded" id="bienvenido" >
-        <h1 class="display-3">Bienvenido a Intranet!</h1>
-        <img src="/img/logo.png" class="img-fluid" alt="Responsive image" style="width: 50%">
-        <hr>
-        <p>Apreciado usuario, en el botón (Realizar Solicitud) podra acceder al formulario para solicitar
-            (certificado laboral, desprendible de nómina, certificado de ingresos y retenciones)</p>
-        <a  class="btn btn-primary" href="https://clinicacasanare.co/sistema/form_solicitud.php">
-            Realizar Solicitud </a>
+@include('partials.notification')
+<!-- Main jumbotron for a primary marketing message or call to action -->
+<div class="jumbotron bg-secondary shadow rounded" id="bienvenido" >
+    <h1 class="display-3">Bienvenido a Intranet!</h1>
+    <img src="/img/logo.png" class="img-fluid" alt="Responsive image" style="width: 50%">
+    <hr>
+    <p>Apreciado usuario, en el botón (Realizar Solicitud) podra acceder al formulario para solicitar
+        (certificado laboral, desprendible de nómina, certificado de ingresos y retenciones)</p>
+    <a  class="btn btn-primary" href="https://clinicacasanare.co/sistema/form_solicitud.php">
+        Realizar Solicitud </a>
 
-        {{--<p>Apreciado usuario para empezar oprima el boton registro y llene los campos correspondientes, posteriormente oprima registrarme
+    {{--<p>Apreciado usuario para empezar oprima el boton registro y llene los campos correspondientes, posteriormente oprima registrarme
          y listo, solo queda esperar a que el administrador o encargado acepte su registro</p>--}}
-       {{-- <p><a class="btn btn-light btn-lg"  data-toggle="modal" data-target="#register"  href="" role="button">Registro &raquo;</a></p>--}}
+    {{-- <p><a class="btn btn-light btn-lg"  data-toggle="modal" data-target="#register"  href="" role="button">Registro &raquo;</a></p>--}}
     </div>
 
     <div class="container">
-        {{--<div class="card shadow rounded">
+           {{--<div class="card shadow rounded">
             <div class="card-header bg-light">
                 <h2 align="center">Novedades</h2>
             </div>
-        </div>
-        <br>
+</div>
+<br>
         <!-- Example row of columns -->
         <div class="row">
             <div class="col-md-4">
@@ -59,7 +59,7 @@
                                 &raquo;</a></p></div>
                 </div>
             </div>--}}
-    </div> <!-- /container -->
-        </main>
+</div> <!-- /container -->
+</main>
 
 @endsection

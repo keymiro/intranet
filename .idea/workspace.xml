@@ -3,7 +3,6 @@
   <component name="ChangeListManager">
     <list default="true" id="b43ec23d-ae16-483a-9663-d9a418a83fcc" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/database/seeds/PermissionsTableSeeder.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/seeds/PermissionsTableSeeder.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -175,7 +174,7 @@
     <property name="node.js.selected.package.eslint" value="(autodetect)" />
     <property name="node.js.selected.package.tslint" value="(autodetect)" />
     <property name="nodejs_package_manager_path" value="npm" />
-    <property name="settings.editor.selected.configurable" value="Configurable.PHP.Blade" />
+    <property name="settings.editor.selected.configurable" value="preferences.pluginManager" />
     <property name="vue.rearranger.settings.migration" value="true" />
   </component>
   <component name="RecentsManager">
@@ -246,6 +245,11 @@
       <workItem from="1607960527766" duration="6202000" />
       <workItem from="1608213027138" duration="162000" />
       <workItem from="1608213372402" duration="14086000" />
+      <workItem from="1610979549791" duration="288000" />
+      <workItem from="1610980275974" duration="243000" />
+      <workItem from="1610980543858" duration="576000" />
+      <workItem from="1610981198785" duration="351000" />
+      <workItem from="1610981677432" duration="711000" />
     </task>
     <servers />
   </component>
