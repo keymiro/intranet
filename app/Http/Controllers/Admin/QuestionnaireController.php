@@ -177,7 +177,7 @@ class QuestionnaireController extends Controller
             ->whereNotNull('score')
             ->where('user_id',$userId)
             ->get();
-        $ResultUser=DB::table('resultQuestionnaires AS rq')
+        $ResultUser=DB::table('resultquestionnaires AS rq')
             ->selectRaw('
                     rq.id AS id,
                     rq.score as Puntaje,

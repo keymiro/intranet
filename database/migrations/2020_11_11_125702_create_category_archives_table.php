@@ -15,8 +15,8 @@ class CreateCategoryArchivesTable extends Migration
     {
         Schema::create('category_archives', function (Blueprint $table) {
             $table->id();
-            $table->string('name')->nullable();
-            $table->string('description')->nullable();
+            $table->string('name')->nullable()->comment('nombre de la categoria');
+            $table->string('description')->nullable()->comment('descripción de la categoria');
             $table->timestamps();
         });
     }

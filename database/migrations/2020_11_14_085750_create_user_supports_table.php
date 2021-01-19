@@ -15,13 +15,13 @@ class CreateUserSupportsTable extends Migration
     {
         Schema::create('user_supports', function (Blueprint $table) {
             $table->id();
-            $table->string('names')->nullable();
-            $table->string('email')->nullable();
-            $table->string('phone')->nullable();
-            $table->string('jobtitle')->nullable();
-            $table->string('eps')->nullable();
-            $table->string('type')->nullable();
-            $table->string('message','500')->nullable();
+            $table->string('names')->nullable()->comment('nombres del usuario que realiza la pqrf');
+            $table->string('email')->nullable()->comment('email del usuario que realiza la pqrf');
+            $table->string('phone')->nullable()->comment('cel del usuario que realiza la pqrf');
+            $table->string('jobtitle')->nullable()->comment('cargo del usuario que realiza la pqrf');
+            $table->string('eps')->nullable()->comment('eps del usuario que realiza la pqrf');
+            $table->string('type')->nullable()->comment('typo de pqrf');
+            $table->string('message','500')->nullable()->comment('mensaje del usuario que realiza la pqrf');
             $table->timestamps();
         });
     }

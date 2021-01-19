@@ -24,7 +24,7 @@ class CreateAdverseEventsTable extends Migration
             $table->string('namepatient')->nullable()->comment('nombre del paciente');
             $table->string('documentpatient')->nullable()->comment('documento del paciente');
             $table->string('description')->nullable()->comment('descripción del evento adverso');
-            $table->string('consecutive');
+            $table->string('consecutive')->comment('consecutivo del evento adverso');
             //foranea para usuario
             $table->unsignedBigInteger('user_id')->nullable()->comment('relaciona al usuario que reporto');
             $table->foreign('user_id')->references('id')->on('users');

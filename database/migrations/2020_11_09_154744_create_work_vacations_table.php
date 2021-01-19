@@ -18,23 +18,22 @@ class CreateWorkVacationsTable extends Migration
             $table->date('startdate')->nullable()->comment('Fecha inicio vacaciones');
             $table->date('returndate')->nullable()->comment('Fecha de reanuación laborales');
             $table->date('fromdate')->nullable()->comment('periodo de causacion desde');
-            $table->date('untildate')->nullable()->comment('periodo de causacion hasta');;
-            $table->string('businessdays')->nullable();
-            $table->string('requesteddays')->nullable();
-            $table->string('pendingdays')->nullable();
-            $table->string('enjoydays')->nullable();
-            $table->string('observations')->nullable();
-            $table->unsignedBigInteger('user_id')->nullable();
+            $table->date('untildate')->nullable()->comment('periodo de causacion hasta');
+            $table->string('businessdays')->nullable()->comment('No. de días hábiles disponibles para disfrutar');
+            $table->string('requesteddays')->nullable()->comment('No. de días solicitados para disfrutar');
+            $table->string('pendingdays')->nullable()->comment('No. de días que quedan pendientes para este periodo');
+            $table->string('enjoydays')->nullable()->comment('No. dias a disfrutar');
+            $table->string('observations')->nullable()->comment('observación de la solicitud de vacaciones');
+            $table->unsignedBigInteger('user_id')->nullable()->comment('usuario que realiza la solicitud');
             $table->foreign('user_id')->references('id')->on('users');
-            $table->string('igree')->nullable();
-            $table->unsignedBigInteger('coordigree_id')->nullable();
+            $table->string('igree')->nullable()->comment('aprobación (1)por parte del usuario que realiza la solicitud');
+            $table->unsignedBigInteger('coordigree_id')->nullable()->comment('relaciona al coordinador correspondiente del usuario');
             $table->foreign('coordigree_id')->references('id')->on('users');
-            $table->string('coordigree')->nullable();
+            $table->string('coordigree')->nullable()->comment('aprobación de la solicitud por el coordinador, 1 aprobo 0 denego');
 
-            $table->unsignedBigInteger('directigree_id')->nullable();
+            $table->unsignedBigInteger('directigree_id')->nullable()->comment('relaciona al director correspondiente del usuario');;
             $table->foreign('directigree_id')->references('id')->on('users');
-            $table->string('directigree')->nullable();
-            $table->string('v')->default(1);
+            $table->string('directigree')->nullable()->comment('aprobación de la solicitud por el director, 1 aprobo 0 denego');
             $table->timestamps();
         });
     }
