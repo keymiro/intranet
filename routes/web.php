@@ -2,6 +2,11 @@
 
 use Illuminate\Support\Facades\Route;
 
+/*storage link
+    Route::get('link', function(){
+        Artisan::call('storage:link');
+    });
+*/
 /* ruta para el index */
 Route::get('/', 'IndexController@index')->name('index');
 /* rutas de login, pero con el registro deshabilitado*/
