@@ -19,7 +19,8 @@ class CreateChangeTurnsTable extends Migration
             $table->date('datechangeturn')->nullable()->comment('fecha programada de turno');
             $table->string('tchangeturn')->nullable()->comment('horario');
             $table->date('returnchangeturn')->nullable()->comment('fecha devolución turno');
-            $table->string('t1changeturn')->nullable()->comment('hobservaciones del cambio de turno');
+            $table->string('t1changeturn')->nullable()->comment('horario');
+            $table->string('observations')->nullable()->comment('Observaciones');
             $table->unsignedBigInteger('user_id')->nullable()->comment('relaciona al usuario que solicito el cambio de turno');
             $table->foreign('user_id')->references('id')->on('users');
             $table->string('igree')->nullable()->comment('el usuario que solicito el cambio de turno  1 aprueba');
