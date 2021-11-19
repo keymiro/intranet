@@ -22,8 +22,7 @@
                     </div>-->
                     <br>
                     <form action="{{route('Archive.Post')}}"
-                          method="post"
-                          enctype="multipart/form-data">
+                          method="post">
                         @csrf
                         <div class="row">
                             <div class="col">

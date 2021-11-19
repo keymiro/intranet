@@ -15,6 +15,7 @@
     <script src="{{ asset('js/forms_show.js') }}" defer></script>
     <script src="{{ asset('js/area_show.js') }}" defer></script>
     <script src="{{ asset('js/questionnaire.js') }}" defer></script>
+    <script src="{{ asset('js/sorttable.js') }}" defer></script>
     <script src="{{ asset('js/search.js') }}" defer></script>
     <script src="{{ asset('js/toast.js') }}" defer></script>
     <script src="https://kit.fontawesome.com/bbf6ac91e9.js" crossorigin="anonymous"></script>
